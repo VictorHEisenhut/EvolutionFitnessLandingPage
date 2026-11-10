@@ -1,0 +1,22 @@
+# Dependências
+node_modules/
+.npm/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Rascunhos e Prompts de IA (opcional)
+PROMPT_*.md

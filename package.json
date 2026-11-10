@@ -1,0 +1,20 @@
+{
+  "name": "evolution-fitness-landing-page",
+  "version": "1.0.0",
+  "description": "Landing Page de Alta Conversão — Academia Evolution Fitness (Timbó - SC)",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/dev-server.js",
+    "dev": "node scripts/dev-server.js",
+    "test": "node --test tests/evolution.test.js"
+  },
+  "keywords": [
+    "academia-timbo",
+    "evolution-fitness",
+    "musculacao-timbo",
+    "landing-page",
+    "cro"
+  ],
+  "author": "Evolution Academia Ltda. (CNPJ: 16.951.960/0001-77)",
+  "license": "UNLICENSED"
+}
