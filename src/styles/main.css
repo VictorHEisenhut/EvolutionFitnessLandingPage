@@ -201,8 +201,20 @@ h4 {
 
 .section-header {
   max-width: 780px;
-  margin: 0 auto 3.5rem;
+  margin: 0 auto 2rem;
   text-align: center;
+}
+
+@media (min-width: 640px) {
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-header {
+    margin-bottom: 3.25rem;
+  }
 }
 
 .section-header--left {
@@ -659,8 +671,8 @@ h4 {
    ========================================================================== */
 .hero-section {
   position: relative;
-  min-height: min(94vh, 880px);
-  padding: 7.5rem 0 4.5rem;
+  min-height: min(92vh, 860px);
+  padding: 6.5rem 0 3.25rem;
   background-color: var(--bg-base);
   overflow: hidden;
   display: flex;
@@ -668,8 +680,15 @@ h4 {
   isolation: isolate;
 }
 
+@media (min-width: 640px) {
+  .hero-section {
+    padding: 7.25rem 0 4rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero-section {
+    min-height: min(94vh, 880px);
     padding: 8.75rem 0 5rem;
   }
 }
@@ -957,18 +976,25 @@ section[id],
 }
 
 .section-padding {
-  padding: 5.5rem 0;
+  padding: 3.25rem 0;
 }
 
 .section-padding--alt {
-  padding: 5.5rem 0;
+  padding: 3.25rem 0;
   background: var(--bg-raised);
+}
+
+@media (min-width: 640px) {
+  .section-padding,
+  .section-padding--alt {
+    padding: 4.25rem 0;
+  }
 }
 
 @media (min-width: 1024px) {
   .section-padding,
   .section-padding--alt {
-    padding: 7rem 0;
+    padding: 5.75rem 0;
   }
 }
 
@@ -1046,6 +1072,7 @@ section[id],
   justify-content: space-between;
   gap: 1.25rem;
 }
+
 
 .bento-card--featured {
   padding: 0;
@@ -1643,11 +1670,26 @@ section[id],
 
 .review-author-box strong {
   display: block;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-.review-author-box span {
+.review-author-box span,
+.review-author-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.78rem;
   color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.review-author-meta .icon--verified {
+  width: 14px;
+  height: 14px;
+  color: var(--brand-green);
+  flex-shrink: 0;
 }
 
 .author-avatar {
@@ -2087,7 +2129,13 @@ section[id],
 .site-footer {
   background: var(--bg-base);
   border-top: 1px solid var(--border-subtle);
-  padding: 4.5rem 0 7rem;
+  padding: 3.25rem 0 5.75rem;
+}
+
+@media (min-width: 1024px) {
+  .site-footer {
+    padding: 4.5rem 0 6.5rem;
+  }
 }
 
 .footer-grid {
@@ -2367,13 +2415,37 @@ section[id],
    ========================================================================== */
 html.motion-ok .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 html.motion-ok .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+html.motion-ok .card.reveal.is-visible:hover {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito cascata suave para cards e elementos em grade */
+html.motion-ok .bento-grid > .reveal:nth-child(2),
+html.motion-ok .modalities-grid > .reveal:nth-child(2),
+html.motion-ok .plans-grid > .reveal:nth-child(2),
+html.motion-ok .reviews-grid > .reveal:nth-child(2) {
+  transition-delay: 85ms;
+}
+
+html.motion-ok .bento-grid > .reveal:nth-child(3),
+html.motion-ok .modalities-grid > .reveal:nth-child(3),
+html.motion-ok .plans-grid > .reveal:nth-child(3),
+html.motion-ok .reviews-grid > .reveal:nth-child(3) {
+  transition-delay: 170ms;
+}
+
+html.motion-ok .bento-grid > .reveal:nth-child(4) {
+  transition-delay: 255ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

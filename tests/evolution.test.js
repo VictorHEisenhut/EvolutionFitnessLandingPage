@@ -174,6 +174,8 @@ test("8. Integridade de Ativos Visuais, Brand Redesign (#00B245 / #000000), Zero
     "public/assets/images/instrutor-acompanhamento.jpg",
     "public/assets/images/cardio-esteiras.jpg",
     "public/assets/images/funcional-pesos-livres.jpg",
+    "public/assets/images/salao-musculacao-real.jpg",
+    "public/assets/images/cardio-esteiras-real.jpg",
   ];
 
   for (const relPath of requiredFiles) {
