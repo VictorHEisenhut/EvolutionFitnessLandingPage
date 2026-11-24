@@ -4,15 +4,17 @@
  * WhatsApp Principal: (47) 99171-7074 -> https://wa.me/5547991717074
  */
 
-export const WHATSAPP_NUMBER = "5547991717074";
+import { BUSINESS_DATA } from "../config/businessData.js";
+
+export const WHATSAPP_NUMBER = BUSINESS_DATA.contact.whatsappRaw;
 
 export const WHATSAPP_INTENTS = {
   experimental: {
     key: "experimental",
-    label: "Agendar Aula Experimental",
+    label: "Agendar Aula Experimental Gratuita",
     subtitle: "Conhecer estrutura + 1º treino acompanhado",
     message:
-      "Olá! Vim pelo site da Academia Evolution Fitness e gostaria de agendar uma Aula Experimental. Podem me informar como funciona?",
+      "Olá! Vim pelo site da Academia Evolution Fitness e gostaria de agendar uma Aula Experimental Gratuita. Podem me informar como funciona?",
   },
   planos: {
     key: "planos",
@@ -43,40 +45,40 @@ export const WHATSAPP_INTENTS = {
     message:
       "Olá! Vim pelo site da Evolution Fitness e quero saber mais sobre a Musculação Completa com acompanhamento dos instrutores.",
   },
+  cardio: {
+    key: "cardio",
+    label: "Ergometria & Cárdio",
+    subtitle: "Esteiras, bikes e queima calórica",
+    message:
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre a área de Ergometria e Cárdio no salão 100% climatizado.",
+  },
   funcional: {
     key: "funcional",
-    label: "Ergometria, Cárdio e Funcional",
-    subtitle: "Condicionamento em ambiente 100% climatizado",
+    label: "Treinamento Funcional & Pesos Livres",
+    subtitle: "Mobilidade, equilíbrio e dinamismo",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre a área de Cárdio e Treinamento Funcional.",
-  },
-  coletivas: {
-    key: "coletivas",
-    label: "Aulas Coletivas e Dança",
-    subtitle: "Grade de horários das aulas em grupo",
-    message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de ver a grade de horários das Aulas Coletivas e Dança.",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre o Treinamento Funcional e área de Pesos Livres.",
   },
   plano_mensal: {
     key: "plano_mensal",
     label: "Plano Mensal (Flexibilidade)",
-    subtitle: "Consulta de valor do Plano Mensal",
+    subtitle: "A partir de R$ 139,90/mês",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar o valor atualizado do Plano Mensal.",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar as condições do Plano Mensal (a partir de R$ 139,90/mês).",
   },
   plano_trimestral: {
     key: "plano_trimestral",
     label: "Plano Trimestral (Evolução Consistente)",
-    subtitle: "Consulta de condição do Plano Trimestral",
+    subtitle: "A partir de R$ 119,90/mês",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar as condições do Plano Trimestral.",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar as condições do Plano Trimestral (a partir de R$ 119,90/mês).",
   },
   plano_anual: {
     key: "plano_anual",
     label: "Plano Anual / Recorrente (Melhor Custo-Benefício)",
-    subtitle: "Economia máxima o ano todo",
+    subtitle: "A partir de R$ 99,90/mês • Economia Máxima",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e quero garantir a condição especial do Plano Anual / Recorrente.",
+      "Olá! Vim pelo site da Evolution Fitness e quero garantir a condição especial do Plano Anual / Recorrente (a partir de R$ 99,90/mês).",
   },
   convenios: {
     key: "convenios",
@@ -84,6 +86,13 @@ export const WHATSAPP_INTENTS = {
     subtitle: "TotalPass, Rede Boa Vida e parcerias corporativas",
     message:
       "Olá! Vim pelo site da Evolution Fitness e gostaria de verificar as condições para convênios (TotalPass, Rede Boa Vida e empresas parceiras) ou plano familiar.",
+  },
+  instrutores: {
+    key: "instrutores",
+    label: "Conhecer a Equipe & Agendar 1º Treino",
+    subtitle: "Aula experimental gratuita acompanhada por professor",
+    message:
+      "Olá! Vim pelo site da Evolution Fitness, conheci a equipe de instrutores e gostaria de agendar minha Aula Experimental Gratuita com acompanhamento.",
   },
 };
 

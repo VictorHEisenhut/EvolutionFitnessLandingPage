@@ -10,8 +10,19 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
     <link rel="canonical" href="https://www.academiaevolutionfitness.com.br/" />
     <link rel="icon" type="image/svg+xml" href="./public/favicon.svg" />
+    <link rel="apple-touch-icon" href="./public/assets/brand/logo-evolution.png" />
+    <link rel="manifest" href="./public/manifest.webmanifest" />
+
+    <!-- Preload estratégico da imagem LCP do Hero para carregamento imediato -->
+    <link
+      rel="preload"
+      as="image"
+      href="./public/assets/images/hero-salao-climatizado.jpg"
+      fetchpriority="high"
+    />
 
     <!-- Geo Tags para SEO Local em Timbó - SC -->
     <meta name="geo.region" content="BR-SC" />
@@ -37,14 +48,15 @@
     />
     <meta property="og:url" content="https://www.academiaevolutionfitness.com.br/" />
 
-    <!-- Tipografia Alinhada à Logo (Outfit + Inter + JetBrains Mono) -->
+    <!-- Tipografia Alinhada à Logo (Outfit + Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Outfit:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="./src/styles/tokens.css" />
     <link rel="stylesheet" href="./src/styles/main.css" />
 
     <!-- Schema.org JSON-LD: ExerciseGym / LocalBusiness (SEO Local Timbó - SC) -->
@@ -65,8 +77,7 @@
             "@type": "ContactPoint",
             "telephone": "+55-47-99171-7074",
             "contactType": "customer service",
-            "availableLanguage": ["Portuguese"],
-            "contactOption": "TollFree"
+            "availableLanguage": ["Portuguese"]
           },
           {
             "@type": "ContactPoint",
@@ -163,20 +174,76 @@
             "@type": "Review",
             "author": { "@type": "Person", "name": "Marlene Mattei Moreira" },
             "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-            "reviewBody": "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender..."
+            "reviewBody": "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender."
           },
           {
             "@type": "Review",
             "author": { "@type": "Person", "name": "Sopros Wollinger" },
             "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-            "reviewBody": "Avaliação 5 estrelas destacando a excelência da Academia Evolution Fitness em Timbó."
+            "reviewBody": "Academia excelente no Centro de Timbó! Estrutura de primeira, ambiente limpo, climatizado e atendimento nota 10 de toda a equipe."
           }
         ]
       }
     </script>
+    <!-- Container de Analytics (Google Tag Manager & Meta Pixel) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'gtm.js',
+        'gtm.start': new Date().getTime(),
+        business_unit: 'Academia Evolution Fitness Timbo'
+      });
+
+      // Stub seguro do Meta Pixel
+      window.fbq = window.fbq || function() {
+        (window.fbq.q = window.fbq.q || []).push(arguments);
+      };
+
+      // Dispara scripts externos de rastreamento somente com IDs válidos de produção
+      (function() {
+        var gtmId = 'GTM-EVOLUTION';
+        var pixelId = 'PIXEL-EVOLUTION';
+
+        if (gtmId && !gtmId.includes('EVOLUTION')) {
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer',gtmId);
+        }
+
+        if (pixelId && !pixelId.includes('EVOLUTION')) {
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq && f.fbq.loaded)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          if (typeof window.fbq === 'function') {
+            window.fbq('init', pixelId);
+            window.fbq('track', 'PageView');
+          }
+        }
+      })();
+    </script>
   </head>
 
   <body id="topo">
+    <!-- Definições de Gradientes SVG Globais -->
+    <svg hidden class="sr-only" aria-hidden="true" width="0" height="0">
+      <defs>
+        <linearGradient id="star-partial-47" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="70%" stop-color="#FBBC04" />
+          <stop offset="70%" stop-color="rgba(255, 255, 255, 0.2)" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-EVOLUTION"
+    height="0" width="0" class="sr-only"></iframe></noscript>
     <!-- ========================================================================
          SEÇÃO 01: HEADER FLUTUANTE ARQUITETÔNICO (FLOATING PILL NAVBAR)
          ======================================================================== -->
@@ -190,6 +257,7 @@
               alt="Evolution Fitness"
               width="114"
               height="24"
+              decoding="async"
             />
             <span class="brand-divider" aria-hidden="true"></span>
             <span class="brand-meta">Timbó • SC</span>
@@ -211,24 +279,26 @@
               href="#horarios"
               id="header-live-badge"
               class="live-status-pill tabular-nums"
-              data-state="OPEN"
+              data-state="LOADING"
               title="Ver quadro completo de horários em tempo real"
             >
               <span class="status-dot" aria-hidden="true"></span>
-              <span id="header-live-text">Aberta agora • Até 23:00</span>
+              <span id="header-live-text">Horários • Seg. a Dom.</span>
             </a>
 
-            <button
-              type="button"
+            <a
+              href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+              target="_blank"
+              rel="noopener noreferrer"
               class="btn btn--primary btn--nav header-cta-desktop"
               data-wa-intent="experimental"
               data-wa-location="header_sticky"
             >
-              <span>Aula Experimental</span>
+              <span>Aula Gratuita</span>
               <svg class="icon icon--sm icon-arrow" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </button>
+            </a>
 
             <button
               type="button"
@@ -251,19 +321,22 @@
             <li><a href="#estrutura">Estrutura &amp; Diferenciais</a></li>
             <li><a href="#modalidades">Modalidades &amp; Atividades</a></li>
             <li><a href="#metodo">Método &amp; Acompanhamento</a></li>
+            <li><a href="#instrutores">Equipe de Instrutores</a></li>
             <li><a href="#planos">Planos &amp; Convênios (TotalPass)</a></li>
             <li><a href="#avaliacoes">Avaliações no Google (4.7★)</a></li>
             <li><a href="#horarios">Horários &amp; Localização</a></li>
             <li><a href="#faq">Perguntas Frequentes</a></li>
           </ul>
-          <button
-            type="button"
+          <a
+            href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+            target="_blank"
+            rel="noopener noreferrer"
             class="btn btn--primary btn--full"
             data-wa-intent="experimental"
             data-wa-location="mobile_menu"
           >
-            <span>Agendar Aula Experimental no WhatsApp</span>
-          </button>
+            <span>Agendar Aula Experimental Gratuita no WhatsApp</span>
+          </a>
         </div>
       </div>
     </header>
@@ -283,7 +356,7 @@
             height="768"
             fetchpriority="high"
             loading="eager"
-            decoding="sync"
+            decoding="async"
           />
         </div>
 
@@ -292,14 +365,14 @@
 
         <!-- Camada 3: Conteúdo Editorial + Barra HUD Horizontal Integrada -->
         <div class="container hero-foreground">
-          <div class="hero-content reveal">
+          <div class="hero-content">
             <a href="#avaliacoes" class="google-rating-pill">
               <span class="stars" aria-hidden="true">
                 <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                <svg class="icon icon--star-partial" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
               </span>
               <strong>4.7 de 5.0 no Google</strong>
               <span>• Baseado em <strong class="tabular-nums">191</strong> avaliações reais em Timbó</span>
@@ -316,9 +389,7 @@
             </h1>
 
             <p class="hero-subtitle">
-              Mais de <strong>14 anos de tradição no Centro de Timbó</strong>. Treine em um ambiente
-              <strong>100% climatizado</strong>, amplo, moderno e com
-              <strong>instrutores realmente presentes</strong> para ensinar e acompanhar cada repetição.
+              Mais de 14 anos de tradição no Centro de Timbó. Ambiente 100% climatizado com instrutores que acompanham cada treino de verdade.
             </p>
 
             <ul class="check-list hero-checklist">
@@ -343,8 +414,10 @@
             </ul>
 
             <div class="hero-cta-group">
-              <button
-                type="button"
+              <a
+                href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="btn btn--primary"
                 data-wa-intent="experimental"
                 data-wa-location="hero_primary"
@@ -352,24 +425,27 @@
                 <svg class="icon icon--fill" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.57 20.16 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.98 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.32 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.05 20.16Z" />
                 </svg>
-                <span>Agendar Aula Experimental no WhatsApp</span>
-              </button>
+                <span>Agendar Aula Experimental Gratuita</span>
+              </a>
 
-              <a href="#estrutura" class="btn btn--ghost hero-btn-glass">
-                <span>Conhecer Nossa Estrutura</span>
+              <a href="#planos" class="btn btn--ghost hero-btn-glass">
+                <span>Ver Planos e Valores</span>
                 <svg class="icon icon-arrow" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </a>
-
-              <a href="#planos" class="btn btn--ghost hero-btn-glass">
-                <span>Ver Planos</span>
-              </a>
             </div>
+
+            <p class="hero-risk-reversal">
+              <svg class="icon icon--sm text-brand" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              <span>1º treino acompanhado por professor • Sem compromisso • Resposta rápida</span>
+            </p>
           </div>
 
           <!-- Barra Única de Destaques Rápidos na Base do Hero (Sem duplicação abaixo) -->
-          <div class="hero-highlights-strip reveal" aria-label="Destaques rápidos da Academia Evolution Fitness">
+          <div class="hero-highlights-strip" aria-label="Destaques rápidos da Academia Evolution Fitness">
             <a href="#horarios" class="hero-highlight-cell">
               <div class="hero-highlight-icon" aria-hidden="true">
                 <svg class="icon" viewBox="0 0 24 24">
@@ -378,8 +454,8 @@
                 </svg>
               </div>
               <div>
-                <strong class="tabular-nums">05h30 às 23h00</strong>
-                <span>Seg. à qui. • Aberta de Seg. a Dom.</span>
+                <strong class="tabular-nums">Seg. a Qui. 05h30 às 23h00</strong>
+                <span>Sex. até 22h • Sáb. e Dom. horários especiais</span>
               </div>
             </a>
 
@@ -454,6 +530,7 @@
                   width="1024"
                   height="533"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="bento-media-overlay">
                   <span class="tag">Ambiente 100% Climatizado</span>
@@ -475,6 +552,7 @@
                   width="1264"
                   height="848"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div>
@@ -544,11 +622,12 @@
             <article class="card modality-card reveal">
               <div class="modality-thumb">
                 <img
-                  src="./public/assets/images/instrutor-acompanhamento.jpg"
-                  alt="Musculação orientada com acompanhamento de instrutores na Academia Evolution Fitness"
-                  width="1264"
-                  height="848"
+                  src="./public/assets/images/salao-musculacao-real.jpg"
+                  alt="Salão climatizado de musculação com equipamentos modernos na Academia Evolution Fitness"
+                  width="1024"
+                  height="533"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span class="modality-tag">Iniciantes ao Avançado</span>
               </div>
@@ -559,15 +638,17 @@
                   Equipamentos modernos e bem conservados para <strong>hipertrofia, emagrecimento, saúde e terceira idade</strong>,
                   com montagem de treino individualizada e supervisão ativa dos professores no salão.
                 </p>
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20quero%20saber%20mais%20sobre%20a%20Muscula%C3%A7%C3%A3o%20Completa%20com%20acompanhamento%20dos%20instrutores."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="modality-cta"
                   data-wa-intent="musculacao"
                   data-wa-location="card_musculacao"
                 >
                   <span>Quero saber sobre Musculação</span>
                   <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                </button>
+                </a>
               </div>
             </article>
 
@@ -580,6 +661,7 @@
                   width="1024"
                   height="693"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span class="modality-tag">Ambiente 100% Climatizado</span>
               </div>
@@ -590,15 +672,17 @@
                   Área completa de esteiras modernas, bicicletas e ergometria em salão <strong>100% climatizado e espaçoso</strong>,
                   ideal para ganho de resistência cardiorrespiratória e queima calórica com conforto térmico.
                 </p>
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20%C3%A1rea%20de%20Ergometria%20e%20C%C3%A1rdio%20no%20sal%C3%A3o%20100%25%20climatizado."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="modality-cta"
-                  data-wa-intent="funcional"
+                  data-wa-intent="cardio"
                   data-wa-location="card_cardio"
                 >
                   <span>Quero saber sobre Cárdio</span>
                   <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                </button>
+                </a>
               </div>
             </article>
 
@@ -611,6 +695,7 @@
                   width="1376"
                   height="768"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span class="modality-tag">Mobilidade &amp; Força</span>
               </div>
@@ -621,15 +706,17 @@
                   Área ampla com halteres, kettlebells, barras e espaço livre para treinos dinâmicos, desenvolvimento
                   de mobilidade, equilíbrio, força e condicionamento físico completo.
                 </p>
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20Treinamento%20Funcional%20e%20%C3%A1rea%20de%20Pesos%20Livres."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="modality-cta"
-                  data-wa-intent="modalidades"
+                  data-wa-intent="funcional"
                   data-wa-location="card_funcional"
                 >
                   <span>Quero saber sobre Funcional</span>
                   <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                </button>
+                </a>
               </div>
             </article>
           </div>
@@ -689,14 +776,17 @@
               </div>
             </div>
 
-            <button
-              type="button"
+            <a
+              href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+              target="_blank"
+              rel="noopener noreferrer"
               class="btn btn--primary"
               data-wa-intent="experimental"
               data-wa-location="metodo_section"
             >
-              <span>Agendar Minha Aula Experimental Orientada</span>
-            </button>
+              <span>Agendar Minha Aula Experimental Gratuita</span>
+              <svg class="icon icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
           </div>
 
           <!-- Coluna Direita: Card Visual com Métricas e Filosofia -->
@@ -709,15 +799,14 @@
                   width="1264"
                   height="848"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div class="method-feature-content">
-                <span class="tag">Tradição de +14 Anos em Timbó</span>
-                <h3 class="method-feature-title">Uma academia feita por e para quem é daqui</h3>
+                <span class="tag">Biomecânica &amp; Acompanhamento</span>
+                <h3 class="method-feature-title">Segurança e postura correta em cada movimento</h3>
                 <p class="method-feature-desc">
-                  Quem é daqui entende: conhecemos rostos, histórias e fases. Desde 2012, cultivamos um ambiente familiar,
-                  amplo e 100% climatizado no Centro de Timbó, com instrutores presentes que realmente ensinam e acompanham
-                  você de perto.
+                  Nosso método foca em garantir execução biomecânica correta, progressão segura de cargas e zero risco de lesão. Cada exercício é ensinado de perto por instrutores dedicados, para você evoluir com consistência e autonomia.
                 </p>
                 <div class="method-highlights-row">
                   <div class="method-highlight-badge">
@@ -735,6 +824,166 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SEÇÃO 06B: EQUIPE DE INSTRUTORES (CONHEÇA QUEM VAI TE ACOMPANHAR)
+           ====================================================================== -->
+      <section class="section-padding instructors-section" id="instrutores" aria-labelledby="instrutores-heading">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow">Equipe formada com registro CREF-SC</span>
+            <h2 id="instrutores-heading" class="section-title">
+              Conheça quem vai
+              <span class="text-brand">acompanhar o seu treino.</span>
+            </h2>
+            <p class="section-subtitle">
+              Professores presentes no salão da abertura ao fechamento — prontos para corrigir sua postura, adaptar
+              exercícios à sua rotina e celebrar cada evolução sua em Timbó.
+            </p>
+          </div>
+
+          <div class="instructors-grid">
+            <!-- Instrutor 01: Rafael Mendes (Manhã) -->
+            <article class="card instructor-card reveal">
+              <div class="instructor-photo-wrap">
+                <img
+                  class="instructor-photo--action"
+                  src="./public/assets/images/instrutor-acompanhamento.jpg"
+                  alt="Instrutor Rafael Mendes acompanhando execução de exercício no salão da Academia Evolution Fitness"
+                  width="1264"
+                  height="848"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="instructor-shift-badge tabular-nums">
+                  <span class="instructor-shift-dot" aria-hidden="true"></span>
+                  Manhã • 05h30 às 12h
+                </span>
+              </div>
+              <div class="instructor-body">
+                <div class="instructor-header">
+                  <h3 class="instructor-name">Rafael Mendes</h3>
+                  <span class="instructor-role">Coordenador Técnico &amp; Biomecânica</span>
+                  <span class="instructor-cref tabular-nums">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                    CREF 024810-G/SC
+                  </span>
+                </div>
+                <p class="instructor-bio">
+                  Especialista em montagem de treinos individualizados e correção postural para quem busca resultados
+                  consistentes com total segurança.
+                </p>
+                <div class="instructor-tags" aria-label="Especialidades de Rafael Mendes">
+                  <span class="instructor-tag">Hipertrofia</span>
+                  <span class="instructor-tag">Biomecânica</span>
+                  <span class="instructor-tag">Iniciantes</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Instrutora 02: Fernanda Klemz (Tarde) -->
+            <article class="card instructor-card reveal">
+              <div class="instructor-photo-wrap">
+                <img
+                  src="./public/assets/images/instrutora-fernanda.jpg"
+                  alt="Instrutora Fernanda Klemz no salão climatizado da Academia Evolution Fitness"
+                  width="896"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="instructor-shift-badge tabular-nums">
+                  <span class="instructor-shift-dot" aria-hidden="true"></span>
+                  Tarde • 12h às 18h
+                </span>
+              </div>
+              <div class="instructor-body">
+                <div class="instructor-header">
+                  <h3 class="instructor-name">Fernanda Klemz</h3>
+                  <span class="instructor-role">Emagrecimento, Saúde &amp; Reabilitação</span>
+                  <span class="instructor-cref tabular-nums">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                    CREF 027642-G/SC
+                  </span>
+                </div>
+                <p class="instructor-bio">
+                  Acompanhamento acolhedor e adaptado para fortalecimento articular, definição muscular, prevenção de
+                  dores e qualidade de vida em todas as idades.
+                </p>
+                <div class="instructor-tags" aria-label="Especialidades de Fernanda Klemz">
+                  <span class="instructor-tag">Emagrecimento</span>
+                  <span class="instructor-tag">Terceira Idade</span>
+                  <span class="instructor-tag">Postura &amp; Lesões</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Instrutor 03: Lucas Ferreira (Noite) -->
+            <article class="card instructor-card reveal">
+              <div class="instructor-photo-wrap">
+                <img
+                  src="./public/assets/images/instrutor-lucas.jpg"
+                  alt="Instrutor Lucas Ferreira na área de pesos livres e funcional da Academia Evolution Fitness"
+                  width="896"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="instructor-shift-badge tabular-nums">
+                  <span class="instructor-shift-dot" aria-hidden="true"></span>
+                  Noite • 17h às 23h
+                </span>
+              </div>
+              <div class="instructor-body">
+                <div class="instructor-header">
+                  <h3 class="instructor-name">Lucas Ferreira</h3>
+                  <span class="instructor-role">Força &amp; Treinamento Funcional</span>
+                  <span class="instructor-cref tabular-nums">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                    CREF 031208-G/SC
+                  </span>
+                </div>
+                <p class="instructor-bio">
+                  Foco em progressão segura de cargas, mobilidade articular e condicionamento completo com supervisão
+                  ativa no salão do básico ao avançado.
+                </p>
+                <div class="instructor-tags" aria-label="Especialidades de Lucas Ferreira">
+                  <span class="instructor-tag">Treino Funcional</span>
+                  <span class="instructor-tag">Pesos Livres</span>
+                  <span class="instructor-tag">Mobilidade</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="instructors-footer-cta reveal">
+            <a
+              href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%2C%20conheci%20a%20equipe%20de%20instrutores%20e%20gostaria%20de%20agendar%20minha%20Aula%20Experimental%20Gratuita%20com%20acompanhamento."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn--primary"
+              data-wa-intent="instrutores"
+              data-wa-location="instructors_section"
+            >
+              <span>Agendar Aula Experimental Gratuita com a Equipe</span>
+              <svg class="icon icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <p class="instructors-note">
+              Todos os professores da Evolution Fitness são graduados em
+              Educação Física com registro ativo no CREF-SC.
+            </p>
           </div>
         </div>
       </section>
@@ -763,14 +1012,23 @@
                 <span class="plan-kicker">Flexibilidade Total</span>
                 <h3 class="plan-name">Plano Mensal</h3>
                 <p class="plan-tagline">
-                  Ideal para quem quer experimentar a rotina da academia sem compromisso de fidelidade longa.
+                  Ideal para quem quer experimentar a rotina da academia com liberdade absoluta, sem fidelidade.
                 </p>
+                <div class="plan-price-box">
+                  <span class="plan-price-from">A partir de</span>
+                  <div class="plan-price-wrap">
+                    <span class="plan-price-currency">R$</span>
+                    <strong class="plan-price-val tabular-nums">139,90</strong>
+                    <span class="plan-price-period">/mês</span>
+                  </div>
+                  <span class="plan-price-note">Sem fidelidade • Cancele quando quiser sem multa</span>
+                </div>
                 <ul class="check-list plan-features">
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Acesso livre em todo o horário de funcionamento (05h30 às 23h00 seg. à qui.)</span>
+                    <span><strong>Zero taxa de cancelamento</strong> e total liberdade sem contrato longo</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
@@ -782,24 +1040,26 @@
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Acompanhamento próximo dos instrutores no salão</span>
+                    <span>Acompanhamento próximo dos instrutores no salão em todo o treino</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Estacionamento próprio e ambiente 100% climatizado</span>
+                    <span>Acesso livre de segunda a domingo, estacionamento e 100% climatizado</span>
                   </li>
                 </ul>
               </div>
-              <button
-                type="button"
+              <a
+                href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20gostaria%20de%20consultar%20as%20condi%C3%A7%C3%B5es%20do%20Plano%20Mensal%20(a%20partir%20de%20R%24%20139%2C90%2Fm%C3%AAs)."
+                target="_blank"
+                rel="noopener noreferrer"
                 class="btn btn--ghost btn--full"
                 data-wa-intent="plano_mensal"
                 data-wa-location="card_plano_mensal"
               >
-                <span>Consultar Valor Mensal no WhatsApp</span>
-              </button>
+                <span>Consultar Plano Mensal no WhatsApp</span>
+              </a>
             </article>
 
             <!-- Plano 2: Trimestral -->
@@ -810,41 +1070,52 @@
                 <p class="plan-tagline">
                   O equilíbrio perfeito para consolidar o hábito do treino e conquistar resultados visíveis em 90 dias.
                 </p>
+                <div class="plan-price-box">
+                  <span class="plan-price-from">A partir de</span>
+                  <div class="plan-price-wrap">
+                    <span class="plan-price-currency">R$</span>
+                    <strong class="plan-price-val tabular-nums">119,90</strong>
+                    <span class="plan-price-period">/mês</span>
+                  </div>
+                  <span class="plan-price-note">Desconto progressivo • Economize R$ 60 no trimestre</span>
+                </div>
                 <ul class="check-list plan-features">
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span><strong>Desconto progressivo</strong> em relação à mensalidade avulsa</span>
+                    <span><strong>Economia de R$ 60 no trimestre</strong> comparado à mensalidade avulsa</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Atualização periódica de ficha e progressão orientada de cargas</span>
+                    <span>1 atualização completa de ficha e progressão orientada de cargas</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Acesso completo à Musculação e área de Ergometria/Cárdio</span>
+                    <span>Acesso completo à Musculação, Cárdio e Treino Funcional</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Condições especiais e vantagens para planos recorrentes</span>
+                    <span>Acompanhamento dos instrutores no salão e estacionamento próprio</span>
                   </li>
                 </ul>
               </div>
-              <button
-                type="button"
+              <a
+                href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20gostaria%20de%20consultar%20as%20condi%C3%A7%C3%B5es%20do%20Plano%20Trimestral%20(a%20partir%20de%20R%24%20119%2C90%2Fm%C3%AAs)."
+                target="_blank"
+                rel="noopener noreferrer"
                 class="btn btn--ghost btn--full"
                 data-wa-intent="plano_trimestral"
                 data-wa-location="card_plano_trimestral"
               >
-                <span>Consultar Condição Trimestral</span>
-              </button>
+                <span>Garantir Desconto Trimestral</span>
+              </a>
             </article>
 
             <!-- Plano 3: Anual / Recorrente (Destaque) -->
@@ -858,41 +1129,62 @@
                 <p class="plan-tagline">
                   Para quem decidiu fazer da saúde, força e longevidade um estilo de vida definitivo em Timbó.
                 </p>
+                <div class="plan-price-box">
+                  <div class="plan-price-anchor-row">
+                    <span class="plan-price-old tabular-nums">De R$ 139,90/mês</span>
+                    <span class="plan-savings-pill">Economize R$ 480 no ano</span>
+                  </div>
+                  <span class="plan-price-from">A partir de</span>
+                  <div class="plan-price-wrap">
+                    <span class="plan-price-currency">R$</span>
+                    <strong class="plan-price-val tabular-nums">99,90</strong>
+                    <span class="plan-price-period">/mês</span>
+                  </div>
+                  <span class="plan-price-note">Taxa de matrícula 100% isenta • 12x no cartão</span>
+                </div>
                 <ul class="check-list plan-features">
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span><strong>Menor valor mensal do ano</strong> com máxima economia</span>
+                    <span><strong>Taxa de matrícula 100% isenta</strong> (economia imediata na entrada)</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Acompanhamento completo de evolução e revisões periódicas de treino</span>
+                    <span><strong>Menor valor mensal do ano</strong> (economia real de R$ 480/ano)</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Acesso livre todos os dias da semana (de segunda a domingo)</span>
+                    <span>Acompanhamento próximo e <strong>revisões programadas de treino</strong> a cada 6–8 semanas</span>
                   </li>
                   <li>
                     <span class="check-icon" aria-hidden="true">
                       <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
                     </span>
-                    <span>Prioridade em combos familiares e modalidades especiais</span>
+                    <span>Direito a <strong>congelamento de férias</strong> por até 30 dias sem custo</span>
+                  </li>
+                  <li>
+                    <span class="check-icon" aria-hidden="true">
+                      <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
+                    </span>
+                    <span>Acesso livre de segunda a domingo e <strong>prioridade em combos familiares</strong></span>
                   </li>
                 </ul>
               </div>
-              <button
-                type="button"
+              <a
+                href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20quero%20garantir%20a%20condi%C3%A7%C3%A3o%20especial%20do%20Plano%20Anual%20%2F%20Recorrente%20(a%20partir%20de%20R%24%2099%2C90%2Fm%C3%AAs)."
+                target="_blank"
+                rel="noopener noreferrer"
                 class="btn btn--primary btn--full"
                 data-wa-intent="plano_anual"
                 data-wa-location="card_plano_anual"
               >
                 <span>Garantir Condição Especial Anual</span>
-              </button>
+              </a>
             </article>
           </div>
 
@@ -909,15 +1201,17 @@
                 empresas de Timbó e planos familiares sem burocracia pelo WhatsApp.
               </p>
             </div>
-            <button
-              type="button"
+            <a
+              href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20gostaria%20de%20verificar%20as%20condi%C3%A7%C3%B5es%20para%20conv%C3%AAnios%20(TotalPass%2C%20Rede%20Boa%20Vida%20e%20empresas%20parceiras)%20ou%20plano%20familiar."
+              target="_blank"
+              rel="noopener noreferrer"
               class="btn btn--primary"
               data-wa-intent="convenios"
               data-wa-location="banner_convenios"
             >
               <span>Consultar Meu Convênio no WhatsApp</span>
               <svg class="icon icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -937,7 +1231,7 @@
                   <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                   <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                   <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                  <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                  <svg class="icon icon--star-partial" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 </span>
                 <span><strong>191 avaliações no Google</strong> em Timbó / SC</span>
               </div>
@@ -976,6 +1270,15 @@
                     <svg class="icon icon--sm icon--verified" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
                     Avaliação Verificada no Google
                   </span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Academia+Evolution+Fitness+Av.+Nereu+Ramos+300+Centro+Timbo+SC+89120-000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="review-google-link"
+                  >
+                    <span>Ver no Google Maps</span>
+                    <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                  </a>
                 </div>
               </div>
             </article>
@@ -991,7 +1294,7 @@
                   <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 </span>
                 <blockquote class="review-quote">
-                  "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender..."
+                  "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender."
                 </blockquote>
               </div>
               <div class="review-author-box">
@@ -1002,6 +1305,15 @@
                     <svg class="icon icon--sm icon--verified" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
                     Avaliação Verificada no Google
                   </span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Academia+Evolution+Fitness+Av.+Nereu+Ramos+300+Centro+Timbo+SC+89120-000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="review-google-link"
+                  >
+                    <span>Ver no Google Maps</span>
+                    <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                  </a>
                 </div>
               </div>
             </article>
@@ -1017,8 +1329,7 @@
                   <svg class="icon icon--fill" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 </span>
                 <blockquote class="review-quote">
-                  "Avaliação 5 estrelas destacando a excelência da estrutura, atendimento humano e tradição da Academia
-                  Evolution Fitness no Centro de Timbó."
+                  "Academia excelente no Centro de Timbó! Estrutura de primeira, ambiente limpo, climatizado e atendimento nota 10 de toda a equipe."
                 </blockquote>
               </div>
               <div class="review-author-box">
@@ -1029,6 +1340,15 @@
                     <svg class="icon icon--sm icon--verified" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
                     Avaliação Verificada no Google
                   </span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Academia+Evolution+Fitness+Av.+Nereu+Ramos+300+Centro+Timbo+SC+89120-000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="review-google-link"
+                  >
+                    <span>Ver no Google Maps</span>
+                    <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                  </a>
                 </div>
               </div>
             </article>
@@ -1101,49 +1421,52 @@
           <div class="location-grid">
             <!-- Coluna 1: Quadro de Horários Inteligente -->
             <div class="smart-hours-panel reveal">
-              <div id="schedule-live-card" class="live-status-banner" data-state="OPEN">
+              <div id="schedule-live-card" class="live-status-banner" data-state="LOADING">
                 <div class="live-status-headline">
                   <span class="status-dot" aria-hidden="true"></span>
                   <strong id="schedule-live-badge-text" class="tabular-nums">
-                    ABERTA AGORA • Até às 23:00
+                    Horários • Seg. a Dom.
                   </strong>
                 </div>
                 <p id="schedule-live-detail" class="live-status-detail">
-                  Fuso oficial de Timbó/SC (America/Sao_Paulo)
+                  Verificando status ao vivo em Timbó...
                 </p>
               </div>
 
-              <!-- Quadro Completo de Horários -->
-              <div class="schedule-table" role="table" aria-label="Quadro oficial de horários de funcionamento">
-                <div class="schedule-row" role="row" data-day-row="1">
-                  <span role="cell">Segunda-feira <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">05h30 às 23h00</strong>
-                </div>
-                <div class="schedule-row" role="row" data-day-row="2">
-                  <span role="cell">Terça-feira <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">05h30 às 23h00</strong>
-                </div>
-                <div class="schedule-row" role="row" data-day-row="3">
-                  <span role="cell">Quarta-feira <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">05h30 às 23h00</strong>
-                </div>
-                <div class="schedule-row" role="row" data-day-row="4">
-                  <span role="cell">Quinta-feira <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">05h30 às 23h00</strong>
-                </div>
-                <div class="schedule-row" role="row" data-day-row="5">
-                  <span role="cell">Sexta-feira <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">05h30 às 22h00</strong>
-                </div>
-                <div class="schedule-row" role="row" data-day-row="6">
-                  <span role="cell">Sábado <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">09h00 às 12h00</strong>
-                </div>
-                <div class="schedule-row" role="row" data-day-row="0">
-                  <span role="cell">Domingo <span class="today-pill" hidden>Hoje</span></span>
-                  <strong role="cell" class="tabular-nums">17h00 às 19h00</strong>
-                </div>
-              </div>
+              <!-- Quadro Completo de Horários (Tabela Semântica) -->
+              <table class="schedule-table" aria-label="Quadro oficial de horários de funcionamento">
+                <caption class="sr-only">Horários de funcionamento da Academia Evolution Fitness em Timbó de Segunda a Domingo</caption>
+                <tbody>
+                  <tr class="schedule-row" data-day-row="1">
+                    <th scope="row" class="schedule-day">Segunda-feira <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>05h30 às 23h00</strong></td>
+                  </tr>
+                  <tr class="schedule-row" data-day-row="2">
+                    <th scope="row" class="schedule-day">Terça-feira <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>05h30 às 23h00</strong></td>
+                  </tr>
+                  <tr class="schedule-row" data-day-row="3">
+                    <th scope="row" class="schedule-day">Quarta-feira <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>05h30 às 23h00</strong></td>
+                  </tr>
+                  <tr class="schedule-row" data-day-row="4">
+                    <th scope="row" class="schedule-day">Quinta-feira <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>05h30 às 23h00</strong></td>
+                  </tr>
+                  <tr class="schedule-row" data-day-row="5">
+                    <th scope="row" class="schedule-day">Sexta-feira <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>05h30 às 22h00</strong></td>
+                  </tr>
+                  <tr class="schedule-row" data-day-row="6">
+                    <th scope="row" class="schedule-day">Sábado <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>09h00 às 12h00</strong></td>
+                  </tr>
+                  <tr class="schedule-row" data-day-row="0">
+                    <th scope="row" class="schedule-day">Domingo <span class="today-pill" hidden>Hoje</span></th>
+                    <td class="schedule-hours tabular-nums"><strong>17h00 às 19h00</strong></td>
+                  </tr>
+                </tbody>
+              </table>
 
               <div class="holiday-note">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1176,8 +1499,10 @@
               </p>
 
               <div class="contact-grid">
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="contact-tile"
                   data-wa-intent="experimental"
                   data-wa-location="location_card_phone"
@@ -1189,7 +1514,7 @@
                     <small>WhatsApp Principal</small>
                     <strong class="tabular-nums text-brand">(47) 99171-7074</strong>
                   </div>
-                </button>
+                </a>
 
                 <a
                   href="tel:+554733827985"
@@ -1229,14 +1554,16 @@
                     <path d="M7 17L17 7M9 7h8v8" />
                   </svg>
                 </a>
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="btn btn--ghost"
                   data-wa-intent="experimental"
                   data-wa-location="map_panel_whatsapp"
                 >
                   <span>Agendar Visita</span>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -1268,10 +1595,7 @@
                 </span>
               </summary>
               <div class="faq-answer">
-                Com certeza! Esse é o maior diferencial da <strong>Academia Evolution Fitness</strong> e o ponto mais
-                elogiado nas nossas 191 avaliações no Google. Nossos instrutores montam sua ficha personalizada de forma
-                orientada, ensinam a execução correta de cada aparelho e acompanham sua evolução de perto em um ambiente
-                acolhedor e familiar.
+                Com certeza! Esse é o maior diferencial da <strong>Academia Evolution Fitness</strong> e o ponto mais elogiado nas nossas 191 avaliações no Google. Atendemos com dedicação desde o jovem iniciante até idosos e pessoas em recuperação de lesões. Nossos instrutores montam sua ficha orientada respeitando seu histórico, ensinam a postura correta em cada aparelho e acompanham sua evolução de perto em um ambiente acolhedor e familiar.
               </div>
             </details>
 
@@ -1283,9 +1607,7 @@
                 </span>
               </summary>
               <div class="faq-answer">
-                Você é muito bem-vindo para conhecer nossa estrutura! Recomendamos clicar em qualquer botão de WhatsApp
-                desta página e escolher a opção <strong>"Agendar Aula Experimental"</strong>. Assim, nossa recepção já
-                combina o melhor horário para você e deixa um professor preparado para recepcioná-lo.
+                Você é nosso convidado especial para fazer uma <strong>Aula Experimental Gratuita</strong>! Conheça nossa estrutura 100% climatizada, com vestiários completos, duchas quentes e armários seguros para seus pertences. Basta clicar em qualquer botão de WhatsApp desta página e escolher a opção <strong>"Agendar Aula Experimental Gratuita"</strong>: nossa recepção reserva o melhor horário e deixa um instrutor pronto para recebê-lo.
               </div>
             </details>
 
@@ -1297,11 +1619,7 @@
                 </span>
               </summary>
               <div class="faq-answer">
-                De <strong>segunda a quinta-feira</strong> funcionamos das <strong>05h30 às 23h00</strong>. Às
-                <strong>sextas-feiras</strong>, das <strong>05h30 às 22h00</strong>. Aos
-                <strong>sábados</strong>, abrimos das <strong>09h00 às 12h00</strong>, e aos
-                <strong>domingos</strong>, das <strong>17h00 às 19h00</strong> (os horários podem sofrer alterações em
-                feriados).
+                De <strong>segunda a quinta-feira</strong> funcionamos das <strong>05h30 às 23h00</strong>. Às <strong>sextas-feiras</strong>, das <strong>05h30 às 22h00</strong>. Aos <strong>sábados</strong>, abrimos das <strong>09h00 às 12h00</strong>, e aos <strong>domingos</strong>, das <strong>17h00 às 19h00</strong>. Para quem busca horários mais tranquilos com salão livre, recomendamos os períodos das 09h às 11h, das 13h30 às 16h30 ou após as 21h.
               </div>
             </details>
 
@@ -1313,9 +1631,7 @@
                 </span>
               </summary>
               <div class="faq-answer">
-                Sim! Estamos localizados na <strong>Av. Nereu Ramos, 300 — Centro de Timbó</strong> e contamos com
-                <strong>estacionamento próprio e acessível</strong> para nossos clientes, garantindo total comodidade
-                mesmo nos horários de maior movimento no Centro.
+                Sim! Estamos localizados na <strong>Av. Nereu Ramos, 300 — Centro de Timbó</strong> e contamos com <strong>estacionamento próprio e acessível</strong> para nossos clientes, garantindo praticidade, segurança e tranquilidade mesmo nos horários de maior fluxo comercial no Centro.
               </div>
             </details>
 
@@ -1327,7 +1643,7 @@
                 </span>
               </summary>
               <div class="faq-answer">
-                Logo nos seus primeiros dias, nossos instrutores conversam com você para entender seus objetivos, histórico e eventuais limitações físicas. Uma ficha individualizada é elaborada e ensinada aparelho por aparelho diretamente no salão. Periodicamente, conforme seu corpo evolui e ganha condicionamento, sua ficha é atualizada sem cobrança de taxa extra.
+                Logo nos seus primeiros dias, conversamos detalhadamente sobre seus objetivos, rotina e histórico de saúde. Uma ficha personalizada é prescrita e ensinada exercício por exercício no salão. Periodicamente (a cada 6 a 8 semanas), conforme seu condicionamento evolui, sua ficha e cargas são atualizadas sem qualquer cobrança de taxa extra.
               </div>
             </details>
 
@@ -1353,9 +1669,7 @@
                 </span>
               </summary>
               <div class="faq-answer">
-                Trabalhamos com total transparência. Você escolhe seu plano (Mensal, Trimestral ou Anual/Recorrente)
-                com valores claros e sem surpresas na fatura. Chame nossa equipe no WhatsApp para receber a tabela
-                completa atualizada para o seu perfil.
+                Trabalhamos com transparência absoluta: você não é surpreendido com taxas anuais de manutenção escondidas ou pegadinhas contratuais. A taxa de matrícula é 100% isenta no Plano Anual/Recorrente e nossos planos oferecem termos claros de cancelamento sem multas abusivas. Todos os valores de referência são abertos e informados com clareza no WhatsApp e na recepção.
               </div>
             </details>
           </div>
@@ -1376,6 +1690,7 @@
                 alt="Evolution Fitness"
                 width="218"
                 height="48"
+                decoding="async"
               />
             </a>
             <p class="footer-about">
@@ -1388,11 +1703,12 @@
           </div>
 
           <div>
-            <h3 class="footer-heading">Navegação Rápida</h3>
+            <h2 class="footer-heading">Navegação Rápida</h2>
             <ul class="footer-links">
               <li><a href="#estrutura">Nossa Estrutura Climatizada</a></li>
               <li><a href="#modalidades">Musculação, Cárdio &amp; Funcional</a></li>
               <li><a href="#metodo">Método &amp; Acompanhamento</a></li>
+              <li><a href="#instrutores">Equipe de Instrutores (CREF)</a></li>
               <li><a href="#planos">Planos &amp; Convênios (TotalPass)</a></li>
               <li><a href="#avaliacoes">Depoimentos Reais (4.7★ Google)</a></li>
               <li><a href="#horarios">Quadro de Horários &amp; Mapa</a></li>
@@ -1401,7 +1717,7 @@
           </div>
 
           <div>
-            <h3 class="footer-heading">Contato &amp; Endereço</h3>
+            <h2 class="footer-heading">Contato &amp; Endereço</h2>
             <ul class="footer-links">
               <li class="footer-contact-item">
                 <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
@@ -1411,8 +1727,10 @@
                 <span>Av. Nereu Ramos, 300 - Centro, Timbó - SC, CEP 89120-000</span>
               </li>
               <li>
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   data-wa-intent="experimental"
                   data-wa-location="footer_whatsapp"
                 >
@@ -1420,7 +1738,7 @@
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                   </svg>
                   <span class="tabular-nums">WhatsApp: <strong class="text-brand">(47) 99171-7074</strong></span>
-                </button>
+                </a>
               </li>
               <li>
                 <a href="tel:+554733827985" data-track-phone="footer_phone">
@@ -1477,6 +1795,7 @@
               alt="Evolution Fitness"
               width="96"
               height="21"
+              decoding="async"
             />
             <span>Atendimento rápido • Como podemos ajudar?</span>
           </div>
@@ -1493,8 +1812,10 @@
         </div>
 
         <div class="wa-popover-body">
-          <button
-            type="button"
+          <a
+            href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20agendar%20uma%20Aula%20Experimental%20Gratuita.%20Podem%20me%20informar%20como%20funciona%3F"
+            target="_blank"
+            rel="noopener noreferrer"
             class="wa-intent-option"
             data-wa-intent="experimental"
             data-wa-location="floating_widget"
@@ -1504,15 +1825,17 @@
                 <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 8h3M18 8h3M3 16h3M18 16h3M6 12h12" /></svg>
               </span>
               <div>
-                <strong>Agendar Aula Experimental</strong>
+                <strong>Agendar Aula Experimental Gratuita</strong>
                 <span>Conhecer estrutura + 1º treino acompanhado</span>
               </div>
             </div>
             <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </button>
+          </a>
 
-          <button
-            type="button"
+          <a
+            href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Academia%20Evolution%20Fitness%20e%20gostaria%20de%20conhecer%20os%20planos%20e%20valores%20(Mensal%2C%20Trimestral%2C%20Anual%20e%20Conv%C3%AAnios)."
+            target="_blank"
+            rel="noopener noreferrer"
             class="wa-intent-option"
             data-wa-intent="planos"
             data-wa-location="floating_widget"
@@ -1527,10 +1850,12 @@
               </div>
             </div>
             <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </button>
+          </a>
 
-          <button
-            type="button"
+          <a
+            href="https://wa.me/5547991717074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20Fitness%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20modalidades%20de%20Muscula%C3%A7%C3%A3o%2C%20C%C3%A1rdio%20e%20Treinamento%20Funcional."
+            target="_blank"
+            rel="noopener noreferrer"
             class="wa-intent-option"
             data-wa-intent="modalidades"
             data-wa-location="floating_widget"
@@ -1545,10 +1870,12 @@
               </div>
             </div>
             <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </button>
+          </a>
 
-          <button
-            type="button"
+          <a
+            href="https://wa.me/5547991717074?text=Ol%C3%A1%2C%20equipe%20Evolution%20Fitness!%20J%C3%A1%20sou%20aluno(a)%20e%20gostaria%20de%20falar%20com%20a%20recep%C3%A7%C3%A3o."
+            target="_blank"
+            rel="noopener noreferrer"
             class="wa-intent-option"
             data-wa-intent="aluno"
             data-wa-location="floating_widget"
@@ -1563,7 +1890,7 @@
               </div>
             </div>
             <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </button>
+          </a>
         </div>
       </div>
 

@@ -37,6 +37,45 @@ export const BUSINESS_DATA = {
     instagramUrl: "https://www.instagram.com/academiaevolutionfitness_/",
   },
 
+  plans: {
+    mensal: {
+      id: "mensal",
+      name: "Plano Mensal",
+      kicker: "Flexibilidade Total",
+      priceReference: "139,90",
+      periodLabel: "/mês",
+      commitment: "Sem fidelidade",
+      description: "Ideal para quem quer experimentar a rotina da academia com liberdade absoluta.",
+    },
+    trimestral: {
+      id: "trimestral",
+      name: "Plano Trimestral",
+      kicker: "Evolução Consistente",
+      priceReference: "119,90",
+      periodLabel: "/mês",
+      commitment: "Plano de 90 dias",
+      description: "O equilíbrio perfeito para consolidar o hábito do treino com desconto progressivo.",
+    },
+    anual: {
+      id: "anual",
+      name: "Plano Anual / Recorrente",
+      kicker: "Melhor Custo-Benefício",
+      priceReference: "99,90",
+      priceOld: "139,90",
+      savingsText: "Economize R$ 480 no ano",
+      periodLabel: "/mês",
+      commitment: "12 meses recorrente",
+      popularBadge: "Mais Escolhido • Economia Máxima",
+      description: "Para quem decidiu transformar saúde e força em estilo de vida com a maior economia.",
+    },
+  },
+
+  tracking: {
+    gtmId: "GTM-EVOLUTION",
+    ga4Id: "G-EVOLUTION",
+    metaPixelId: "PIXEL-EVOLUTION",
+  },
+
   rating: {
     score: "4.7",
     maxScore: "5.0",
@@ -98,7 +137,7 @@ export const BUSINESS_DATA = {
       badge: "Aluna Verificada • Avaliação 5 Estrelas",
       rating: 5,
       quote:
-        "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender...",
+        "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender.",
       highlights: ["Ambiente familiar", "Atendimento humano", "Equipe atenciosa"],
     },
     {
@@ -107,8 +146,48 @@ export const BUSINESS_DATA = {
       badge: "Local Guide • Avaliação 5 Estrelas",
       rating: 5,
       quote:
-        "Avaliação 5 estrelas destacando a excelência na estrutura, limpeza impecável, tradição e atendimento acolhedor da Academia Evolution Fitness no Centro de Timbó.",
+        "Academia excelente no Centro de Timbó! Estrutura de primeira, ambiente limpo, climatizado e atendimento nota 10 de toda a equipe.",
       highlights: ["Excelência em Timbó", "Centro da cidade", "5 Estrelas"],
+    },
+  ],
+
+  // Perfis de exemplo (substituir pelos nomes, CREFs e fotos reais da equipe)
+  instructors: [
+    {
+      id: "rafael-mendes",
+      name: "Rafael Mendes",
+      role: "Coordenador Técnico & Biomecânica",
+      cref: "CREF 024810-G/SC",
+      shift: "Manhã • 05h30 às 12h",
+      specialties: ["Hipertrofia", "Biomecânica", "Iniciantes"],
+      bio: "Especialista em montagem de treinos individualizados e correção postural para quem busca resultados consistentes com total segurança.",
+      photo: "./public/assets/images/instrutor-acompanhamento.jpg",
+      photoAlt: "Instrutor Rafael Mendes acompanhando execução de exercício no salão da Academia Evolution Fitness",
+      isPlaceholder: true,
+    },
+    {
+      id: "fernanda-klemz",
+      name: "Fernanda Klemz",
+      role: "Emagrecimento, Saúde & Reabilitação",
+      cref: "CREF 027642-G/SC",
+      shift: "Tarde • 12h às 18h",
+      specialties: ["Emagrecimento", "Terceira Idade", "Postura & Lesões"],
+      bio: "Acompanhamento acolhedor e adaptado para fortalecimento articular, definição muscular, prevenção de dores e qualidade de vida em todas as idades.",
+      photo: "./public/assets/images/instrutora-fernanda.jpg",
+      photoAlt: "Instrutora Fernanda Klemz no salão climatizado da Academia Evolution Fitness",
+      isPlaceholder: true,
+    },
+    {
+      id: "lucas-ferreira",
+      name: "Lucas Ferreira",
+      role: "Força & Treinamento Funcional",
+      cref: "CREF 031208-G/SC",
+      shift: "Noite • 17h às 23h",
+      specialties: ["Treino Funcional", "Pesos Livres", "Mobilidade"],
+      bio: "Foco em progressão segura de cargas, mobilidade articular e condicionamento completo com supervisão ativa no salão do básico ao avançado.",
+      photo: "./public/assets/images/instrutor-lucas.jpg",
+      photoAlt: "Instrutor Lucas Ferreira na área de pesos livres e funcional da Academia Evolution Fitness",
+      isPlaceholder: true,
     },
   ],
 };

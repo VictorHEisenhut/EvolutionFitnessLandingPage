@@ -292,3 +292,178 @@ test("8. Integridade de Ativos Visuais, Brand Redesign (#00B245 / #000000), Zero
   assert.ok(mainJsContent.includes("initFaqAccordion"), "main.js deve conter a função initFaqAccordion");
 });
 
+test("9. Resiliência de Conversão: CTAs com Links Nativos (wa.me) e Rastreamento sem Bloqueio", () => {
+  const htmlPath = path.join(ROOT_DIR, "index.html");
+  const htmlContent = fs.readFileSync(htmlPath, "utf-8");
+
+  // Hero CTA deve ser um link <a> nativo com wa.me
+  assert.match(
+    htmlContent,
+    /<a[^>]+href="https:\/\/wa\.me\/5547991717074\?text=[^"]+"[^>]+data-wa-location="hero_primary"/,
+    "Hero CTA primário deve ser link nativo para o WhatsApp"
+  );
+  assert.ok(
+    htmlContent.includes("Agendar Aula Experimental Gratuita"),
+    "Hero CTA deve conter o texto atualizado 'Agendar Aula Experimental Gratuita'"
+  );
+
+  // Cards de planos devem possuir links nativos
+  assert.ok(htmlContent.includes('data-wa-intent="plano_mensal"'));
+  assert.ok(htmlContent.includes('data-wa-intent="plano_trimestral"'));
+  assert.ok(htmlContent.includes('data-wa-intent="plano_anual"'));
+  assert.match(htmlContent, /<a[^>]+data-wa-intent="plano_anual"/);
+
+  // Cards de modalidade devem estar com intenções corretas (cardio e funcional)
+  assert.ok(htmlContent.includes('data-wa-intent="cardio"'), "Card Cárdio deve usar intent cardio");
+  assert.ok(htmlContent.includes('data-wa-intent="funcional"'), "Card Funcional deve usar intent funcional");
+});
+
+test("10. Acessibilidade (WCAG AA), Design Tokens e Hierarquia de Cabeçalhos", () => {
+  const tokensPath = path.join(ROOT_DIR, "src/styles/tokens.css");
+  const tokensContent = fs.readFileSync(tokensPath, "utf-8");
+  assert.ok(
+    tokensContent.includes("--text-muted: #8A8A8A;"),
+    "--text-muted deve ser #8A8A8A para aprovar contraste WCAG AA"
+  );
+
+  const mainCssPath = path.join(ROOT_DIR, "src/styles/main.css");
+  const mainCssContent = fs.readFileSync(mainCssPath, "utf-8");
+  assert.match(
+    mainCssContent,
+    /\.mobile-menu-btn\s*\{[^}]*width:\s*44px/s,
+    "mobile-menu-btn deve ter alvo de toque mínimo de 44px"
+  );
+
+  const htmlPath = path.join(ROOT_DIR, "index.html");
+  const htmlContent = fs.readFileSync(htmlPath, "utf-8");
+  assert.ok(
+    htmlContent.includes('<h2 class="footer-heading">'),
+    "Cabeçalhos do footer devem usar h2 para hierarquia semântica correta"
+  );
+  assert.ok(
+    htmlContent.includes('class="hero-risk-reversal"'),
+    "Hero deve conter microcopy de reversão de risco"
+  );
+});
+
+test("11. Transparência de Preços de Referência e FAQ Resiliente", () => {
+  const htmlPath = path.join(ROOT_DIR, "index.html");
+  const htmlContent = fs.readFileSync(htmlPath, "utf-8");
+
+  assert.ok(htmlContent.includes("139,90"), "Plano Mensal com valor de referência R$ 139,90");
+  assert.ok(htmlContent.includes("119,90"), "Plano Trimestral com valor de referência R$ 119,90");
+  assert.ok(htmlContent.includes("99,90"), "Plano Anual com valor de referência R$ 99,90");
+
+  assert.ok(
+    htmlContent.includes("Trabalhamos com transparência absoluta"),
+    "FAQ 7 deve responder de forma transparente sobre taxas e matrícula"
+  );
+});
+
+test("12. Auditoria 360: Performance, Resiliência PWA, Semântica de Horários e A/B Testing", () => {
+  const htmlPath = path.join(ROOT_DIR, "index.html");
+  const htmlContent = fs.readFileSync(htmlPath, "utf-8");
+  const mainCssPath = path.join(ROOT_DIR, "src/styles/main.css");
+  const mainCssContent = fs.readFileSync(mainCssPath, "utf-8");
+  const tokensPath = path.join(ROOT_DIR, "src/styles/tokens.css");
+  const tokensContent = fs.readFileSync(tokensPath, "utf-8");
+  const mainJsPath = path.join(ROOT_DIR, "src/js/main.js");
+  const mainJsContent = fs.readFileSync(mainJsPath, "utf-8");
+
+  // 1. CSS não deve ter @import síncrono encadeado
+  assert.equal(
+    /@import\s+["'][^"']+["'];?/i.test(mainCssContent),
+    false,
+    "main.css não deve conter @import encadeado que bloqueia renderização"
+  );
+
+  // 2. Não deve haver contactOption: TollFree no schema
+  assert.equal(
+    htmlContent.includes('"contactOption": "TollFree"'),
+    false,
+    "Schema JSON-LD não deve marcar celular de Timbó como TollFree (0800)"
+  );
+
+  // 3. Tabela de horários deve ser uma <table> semântica nativa com <caption> e <th>
+  assert.ok(htmlContent.includes('<table class="schedule-table"'), "Horários devem usar <table> semântica");
+  assert.ok(htmlContent.includes('<th scope="row"'), "Linhas de dias devem usar <th scope='row'>");
+
+  // 4. Seletor de WhatsApp deve usar links <a> nativos resilientes
+  assert.match(
+    htmlContent,
+    /<a\s+[^>]*href="https:\/\/wa\.me\/5547991717074\?text=[^"]*"[^>]*class="wa-intent-option"/,
+    "Opções do popover de WhatsApp devem ser tags <a> com wa.me direto"
+  );
+
+  // 5. PWA Manifest e Apple Touch Icon
+  assert.ok(
+    htmlContent.includes('<link rel="manifest" href="./public/manifest.webmanifest" />'),
+    "HTML deve conter link para o manifesto PWA"
+  );
+  assert.ok(
+    htmlContent.includes('<link rel="apple-touch-icon" href="./public/assets/brand/logo-evolution.png" />'),
+    "HTML deve apontar apple-touch-icon para imagem PNG válida"
+  );
+  const manifestPath = path.join(ROOT_DIR, "public/manifest.webmanifest");
+  assert.ok(fs.existsSync(manifestPath), "Arquivo manifest.webmanifest deve existir");
+  const manifestContent = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+  assert.equal(manifestContent.name, "Academia Evolution Fitness");
+  assert.equal(manifestContent.theme_color, "#000000");
+
+  // 6. Tipografia mono deve reutilizar Inter com tabular-nums
+  assert.ok(
+    tokensContent.includes('--font-mono: "Inter", ui-monospace'),
+    "Design tokens devem usar Inter com números tabulares para economizar request de fonte desnecessária"
+  );
+
+  // 7. Mecanismo de A/B Testing leve implementado no main.js
+  assert.ok(
+    mainJsContent.includes("initHeroABTesting"),
+    "main.js deve implementar initHeroABTesting para experimentação de CRO"
+  );
+
+  // 8. Otimização de imagens: tags <img> devem ter decoding="async"
+  const imgMatches = [...htmlContent.matchAll(/<img\s+([^>]+)>/g)];
+  assert.ok(imgMatches.length >= 7, "Devem haver ao menos 7 tags <img> na página");
+  for (const match of imgMatches) {
+    const imgAttrs = match[1];
+    assert.ok(
+      imgAttrs.includes('decoding="async"'),
+      `Tag <img> deve conter decoding="async" para performance de renderização: ${imgAttrs.slice(0, 40)}...`
+    );
+  }
+});
+
+test("13. Seção de Instrutores (#instrutores): Perfis, CREF, Fotos, SSOT e Posicionamento", () => {
+  const htmlPath = path.join(ROOT_DIR, "index.html");
+  const htmlContent = fs.readFileSync(htmlPath, "utf-8");
+
+  // 1. SSOT deve conter lista de instrutores estruturada
+  assert.ok(Array.isArray(BUSINESS_DATA.instructors), "BUSINESS_DATA.instructors deve existir");
+  assert.equal(BUSINESS_DATA.instructors.length, 3, "Devem existir 3 perfis de instrutores no SSOT");
+  for (const inst of BUSINESS_DATA.instructors) {
+    assert.ok(inst.name && inst.role && inst.cref && inst.shift && inst.photo);
+    const imgAbsPath = path.join(ROOT_DIR, inst.photo.replace(/^\.\//, ""));
+    assert.ok(fs.existsSync(imgAbsPath), `Foto do instrutor deve existir: ${inst.photo}`);
+    assert.ok(fs.statSync(imgAbsPath).size > 0, `Foto do instrutor não pode estar vazia: ${inst.photo}`);
+  }
+
+  // 2. Seção deve estar posicionada entre #metodo e #planos
+  const metodoIdx = htmlContent.indexOf('id="metodo"');
+  const instrutoresIdx = htmlContent.indexOf('id="instrutores"');
+  const planosIdx = htmlContent.indexOf('id="planos"');
+  assert.ok(instrutoresIdx > metodoIdx && instrutoresIdx < planosIdx, "#instrutores deve ficar entre #metodo e #planos");
+
+  // 3. Cards com CREF, turnos e CTA nativo com intenção dedicada
+  const instructorCards = [...htmlContent.matchAll(/class="card instructor-card reveal"/g)];
+  assert.equal(instructorCards.length, 3, "Devem existir 3 cards de instrutores no HTML");
+  assert.ok(htmlContent.includes("CREF 024810-G/SC"));
+  assert.ok(htmlContent.includes("CREF 027642-G/SC"));
+  assert.ok(htmlContent.includes("CREF 031208-G/SC"));
+  assert.ok(WHATSAPP_INTENTS.instrutores, "Intenção WhatsApp 'instrutores' deve existir");
+  assert.ok(
+    htmlContent.includes('data-wa-intent="instrutores"'),
+    "Seção de instrutores deve possuir CTA com data-wa-intent='instrutores'"
+  );
+});
+

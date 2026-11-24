@@ -4,15 +4,9 @@
  * Fuso Horário Forçado: America/Sao_Paulo
  */
 
-export const EVOLUTION_SCHEDULE = {
-  0: [{ open: "17:00", close: "19:00" }], // Domingo: 17h00 às 19h00
-  1: [{ open: "05:30", close: "23:00" }], // Segunda-feira: 05h30 às 23h00
-  2: [{ open: "05:30", close: "23:00" }], // Terça-feira: 05h30 às 23h00
-  3: [{ open: "05:30", close: "23:00" }], // Quarta-feira: 05h30 às 23h00
-  4: [{ open: "05:30", close: "23:00" }], // Quinta-feira: 05h30 às 23h00
-  5: [{ open: "05:30", close: "22:00" }], // Sexta-feira: 05h30 às 22h00
-  6: [{ open: "09:00", close: "12:00" }], // Sábado: 09h00 às 12h00
-};
+import { BUSINESS_DATA } from "../config/businessData.js";
+
+export const EVOLUTION_SCHEDULE = BUSINESS_DATA.schedule;
 
 export const DAY_NAMES_PT = [
   "Domingo",

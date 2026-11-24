@@ -1,5 +1,3 @@
-@import "./tokens.css";
-
 /* ==========================================================================
    Academia Evolution Fitness — Brand-Led Redesign
    Verde #00B245 + Preto #000000 • Curva Evolution • Inclinação de 8°
@@ -130,6 +128,11 @@ strong {
 
 .icon--fill {
   fill: currentColor;
+  stroke: none;
+}
+
+.icon--star-partial {
+  fill: url(#star-partial-47) !important;
   stroke: none;
 }
 
@@ -398,7 +401,7 @@ h4 {
 
 .brand-meta {
   font-family: var(--font-display);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-weight: 600;
   line-height: 1;
   color: var(--text-secondary);
@@ -491,11 +494,11 @@ h4 {
 .live-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.38rem;
-  min-height: 34px;
-  padding: 0.25rem 0.58rem;
+  gap: 0.42rem;
+  min-height: 36px;
+  padding: 0.3rem 0.68rem;
   border-radius: var(--radius-pill);
-  font-size: 0.64rem;
+  font-size: 0.72rem;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
@@ -510,19 +513,18 @@ h4 {
     gap: 0.45rem;
     min-height: 36px;
     padding: 0.3rem 0.72rem;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
   }
 }
 
 @media (min-width: 1280px) {
   .live-status-pill {
     padding: 0.3rem 0.78rem;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
 }
 
-.live-status-pill[data-state="CLOSING_SOON"],
-.live-status-pill[data-state="SATURDAY_BREAK"] {
+.live-status-pill[data-state="CLOSING_SOON"] {
   background: var(--status-warn-14);
   border-color: var(--status-warn-border);
   color: var(--status-warn);
@@ -544,8 +546,7 @@ h4 {
   animation: pulseDot 2s infinite;
 }
 
-[data-state="CLOSING_SOON"] .status-dot,
-[data-state="SATURDAY_BREAK"] .status-dot {
+[data-state="CLOSING_SOON"] .status-dot {
   background: var(--status-warn);
   animation: none;
 }
@@ -597,8 +598,10 @@ h4 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--border-strong);
@@ -608,8 +611,8 @@ h4 {
 
 @media (min-width: 640px) {
   .mobile-menu-btn {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -654,7 +657,7 @@ h4 {
   color: var(--brand-green);
 }
 
-@media (min-width: 1140px) {
+@media (min-width: 1024px) {
   .header-nav {
     display: flex;
   }
@@ -672,7 +675,7 @@ h4 {
 .hero-section {
   position: relative;
   min-height: min(92vh, 860px);
-  padding: 6.5rem 0 3.25rem;
+  padding: 5.5rem 0 2.5rem;
   background-color: var(--bg-base);
   overflow: hidden;
   display: flex;
@@ -841,6 +844,38 @@ h4 {
 
 .hero-checklist {
   margin-bottom: 2.25rem;
+}
+
+@media (max-width: 639px) {
+  .hero-title {
+    font-size: clamp(2rem, 7.2vw, 2.45rem);
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+  .hero-checklist {
+    display: none;
+  }
+}
+
+.hero-risk-reversal {
+  font-size: 0.82rem;
+  color: #a1a1aa;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+@media (max-width: 639px) {
+  .hero-risk-reversal {
+    font-size: 0.78rem;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .check-list li {
@@ -1447,6 +1482,193 @@ section[id],
 }
 
 /* ==========================================================================
+   11B. SEÇÃO 06B: EQUIPE DE INSTRUTORES (CONHEÇA QUEM VAI TE ACOMPANHAR)
+   ========================================================================== */
+.instructors-section {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 0%, rgba(0, 178, 69, 0.08) 0%, transparent 65%),
+    var(--bg-raised);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.instructors-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .instructors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .instructors-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.instructor-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  border-radius: var(--radius-lg);
+}
+
+.instructor-photo-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-surface-2);
+}
+
+.instructor-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.instructor-photo-wrap img.instructor-photo--action {
+  object-position: 28% 15%;
+}
+
+.instructor-card:hover .instructor-photo-wrap img {
+  transform: scale(1.04);
+}
+
+.instructor-photo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 52%, rgba(17, 17, 17, 0.96) 100%);
+  pointer-events: none;
+}
+
+.instructor-shift-badge {
+  position: absolute;
+  left: 0.95rem;
+  bottom: 0.85rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.68rem;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.instructor-shift-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand-green);
+  flex-shrink: 0;
+}
+
+.instructor-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.3rem 1.35rem 1.45rem;
+}
+
+.instructor-header {
+  margin-bottom: 0.8rem;
+}
+
+.instructor-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.22rem;
+}
+
+.instructor-role {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--brand-green-bright);
+  margin-bottom: 0.55rem;
+}
+
+.instructor-cref {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.58rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.instructor-cref .icon {
+  width: 14px;
+  height: 14px;
+  color: var(--brand-green);
+}
+
+.instructor-bio {
+  font-size: 0.88rem;
+  line-height: 1.62;
+  color: var(--text-secondary);
+  margin-bottom: 1.1rem;
+  flex: 1;
+}
+
+.instructor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.instructor-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--brand-green-08);
+  border: 1px solid rgba(0, 178, 69, 0.24);
+  padding: 0.24rem 0.62rem;
+  border-radius: var(--radius-pill);
+}
+
+.instructors-footer-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.85rem;
+}
+
+.instructors-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 640px;
+}
+
+/* ==========================================================================
    12. SEÇÃO 07: PLANOS E CONVÊNIOS
    ========================================================================== */
 .plans-grid {
@@ -1488,11 +1710,24 @@ section[id],
 }
 
 @media (min-width: 960px) {
-  .plan-card--featured {
-    transform: translateY(-12px);
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
   }
-  .plan-card--featured:hover {
+  .plans-grid > .plan-card:nth-child(1) {
+    order: 1;
+  }
+  .plans-grid > .plan-card--featured {
+    order: 2;
     transform: translateY(-12px);
+    z-index: 2;
+  }
+  .plans-grid > .plan-card--featured:hover {
+    transform: translateY(-14px);
+  }
+  .plans-grid > .plan-card:nth-child(2) {
+    order: 3;
   }
 }
 
@@ -1533,9 +1768,96 @@ section[id],
 .plan-tagline {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  padding-bottom: 1.4rem;
-  margin-bottom: 1.4rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
   border-bottom: 1px solid var(--border-subtle);
+}
+
+.plan-price-box {
+  margin: 0.75rem 0 1.25rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+}
+
+.plan-card--featured .plan-price-box {
+  background: rgba(0, 178, 69, 0.09);
+  border-color: var(--border-brand);
+}
+
+.plan-price-anchor-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.plan-price-old {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.plan-savings-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  background: var(--brand-green);
+  color: var(--text-on-brand);
+  letter-spacing: 0.02em;
+}
+
+.plan-price-from {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.plan-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.plan-price-currency {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.plan-price-val {
+  font-family: var(--font-mono);
+  font-size: 2.15rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.plan-card--featured .plan-price-val {
+  color: var(--brand-green-bright);
+}
+
+.plan-price-period {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.plan-price-note {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
 }
 
 .plan-features li {
@@ -1549,10 +1871,11 @@ section[id],
   justify-content: space-between;
   gap: 1.25rem;
   margin-top: 2.5rem;
-  padding: 1.75rem 2rem;
+  padding: 2rem 2.25rem;
   border-radius: var(--radius-lg);
-  background: var(--brand-green-08);
+  background: linear-gradient(135deg, rgba(0, 178, 69, 0.14) 0%, rgba(17, 17, 17, 0.95) 100%);
   border: 1px solid var(--border-brand);
+  box-shadow: 0 14px 36px -12px rgba(0, 178, 69, 0.25);
 }
 
 .convenios-banner h3 {
@@ -1690,6 +2013,23 @@ section[id],
   height: 14px;
   color: var(--brand-green);
   flex-shrink: 0;
+}
+
+.review-google-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--brand-green);
+  margin-top: 0.75rem;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s var(--ease-out);
+}
+
+.review-google-link:hover {
+  color: var(--brand-green-bright);
+  transform: translateX(2px);
 }
 
 .author-avatar {
@@ -1838,8 +2178,7 @@ section[id],
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.live-status-banner[data-state="CLOSING_SOON"],
-.live-status-banner[data-state="SATURDAY_BREAK"] {
+.live-status-banner[data-state="CLOSING_SOON"] {
   background: var(--status-warn-14);
   border-color: var(--status-warn-border);
 }
@@ -1866,8 +2205,7 @@ section[id],
   color: var(--brand-green-bright);
 }
 
-.live-status-banner[data-state="CLOSING_SOON"] .live-status-headline strong,
-.live-status-banner[data-state="SATURDAY_BREAK"] .live-status-headline strong {
+.live-status-banner[data-state="CLOSING_SOON"] .live-status-headline strong {
   color: var(--status-warn);
 }
 
@@ -1877,10 +2215,17 @@ section[id],
 }
 
 .schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.schedule-table tbody {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  margin-bottom: 1.25rem;
+  width: 100%;
 }
 
 .schedule-row {
@@ -1894,6 +2239,15 @@ section[id],
   border-left: 3px solid transparent;
   font-size: 0.9rem;
   transition: background-color 0.25s ease;
+}
+
+.schedule-day {
+  font-weight: 500;
+  text-align: left;
+}
+
+.schedule-hours {
+  text-align: right;
 }
 
 .schedule-row:nth-child(odd) {
@@ -1913,11 +2267,11 @@ section[id],
 .today-pill {
   display: inline-block;
   margin-left: 0.45rem;
-  padding: 0.12rem 0.55rem;
+  padding: 0.15rem 0.6rem;
   border-radius: var(--radius-pill);
   background: var(--brand-green);
   color: var(--text-on-brand);
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   font-weight: 800;
   vertical-align: middle;
 }
@@ -2329,6 +2683,8 @@ section[id],
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   text-align: left;
+  color: inherit;
+  text-decoration: none;
   transition: border-color 0.2s ease, transform 0.2s var(--ease-out);
 }
 
@@ -2465,5 +2821,35 @@ html.motion-ok .bento-grid > .reveal:nth-child(4) {
   }
   .evo-underline {
     clip-path: none !important;
+  }
+}
+
+/* ==========================================================================
+   19. OTIMIZAÇÃO DE GPU NO MOBILE (DESATIVAÇÃO DE BLUR PESADO)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header-pill,
+  .mobile-nav-drawer,
+  .hero-btn-glass,
+  .hero-highlights-strip,
+  .whatsapp-popover {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .header-pill {
+    background: rgba(10, 10, 10, 0.94);
+  }
+
+  .mobile-nav-drawer {
+    background: rgba(14, 14, 14, 0.98);
+  }
+
+  .hero-btn-glass {
+    background: rgba(18, 18, 18, 0.92);
+  }
+
+  .hero-highlights-strip {
+    background: rgba(14, 14, 14, 0.94);
   }
 }

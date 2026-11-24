@@ -62,18 +62,26 @@ function initWhatsAppInteractions() {
   const closeBtn = document.getElementById("whatsapp-popover-close");
   const popover = document.getElementById("whatsapp-popover");
 
-  function setPopoverOpen(isOpen) {
+  function setPopoverOpen(isOpen, shouldFocusToggle = true) {
     if (!popover || !toggleBtn || !widgetContainer) return;
+    const isCurrentlyOpen = !popover.hidden;
+    if (isCurrentlyOpen === isOpen) return;
+
     popover.hidden = !isOpen;
     widgetContainer.classList.toggle("is-open", isOpen);
     toggleBtn.setAttribute("aria-expanded", String(isOpen));
+    popover.setAttribute("aria-modal", String(isOpen));
 
     if (isOpen) {
+      const firstOption = popover.querySelector(".wa-intent-option, button, a");
+      if (firstOption) firstOption.focus();
       const currentStatus = getEvolutionGymStatus();
       trackConversionEvent("open_whatsapp_selector", {
         gym_status: currentStatus.isOpen ? "OPEN" : "CLOSED",
         state_code: currentStatus.stateCode,
       });
+    } else if (shouldFocusToggle) {
+      toggleBtn.focus();
     }
   }
 
@@ -81,43 +89,45 @@ function initWhatsAppInteractions() {
     toggleBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       const isCurrentlyOpen = !popover.hidden;
-      setPopoverOpen(!isCurrentlyOpen);
+      setPopoverOpen(!isCurrentlyOpen, true);
     });
   }
 
   if (closeBtn) {
-    closeBtn.addEventListener("click", () => setPopoverOpen(false));
+    closeBtn.addEventListener("click", () => setPopoverOpen(false, true));
   }
 
   document.addEventListener("click", (e) => {
     if (widgetContainer && !widgetContainer.contains(e.target)) {
-      setPopoverOpen(false);
+      setPopoverOpen(false, false);
     }
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setPopoverOpen(false);
+    if (e.key === "Escape" && !popover.hidden) {
+      setPopoverOpen(false, true);
     }
   });
 
-  // Delegação para todos os botões com atributo [data-wa-intent]
-  document.querySelectorAll("[data-wa-intent]").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const intentKey = btn.getAttribute("data-wa-intent") || "experimental";
-      const locationKey = btn.getAttribute("data-wa-location") || "page_cta";
-      openEvolutionWhatsApp(intentKey, locationKey);
-      setPopoverOpen(false);
-    });
-  });
+  // Delegação para todos os botões e links com atributo [data-wa-intent]
+  document.querySelectorAll("[data-wa-intent]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      const intentKey = el.getAttribute("data-wa-intent") || "experimental";
+      const locationKey = el.getAttribute("data-wa-location") || "page_cta";
 
-  // Botão que abre o seletor flutuante focado
-  document.querySelectorAll("[data-open-wa-selector]").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setPopoverOpen(true);
+      if (el.tagName === "A" && el.getAttribute("href")) {
+        // Link nativo: apenas registra o evento no dataLayer/Meta Pixel sem impedir a navegação
+        trackConversionEvent("generate_lead_whatsapp", {
+          lead_intent: intentKey,
+          cta_location: locationKey,
+        });
+        setPopoverOpen(false);
+      } else {
+        // Botão sem link nativo (ex: opções do popover): abre via JS
+        e.preventDefault();
+        openEvolutionWhatsApp(intentKey, locationKey);
+        setPopoverOpen(false);
+      }
     });
   });
 }
@@ -155,32 +165,6 @@ function initMicroConversionTracking() {
 }
 
 /**
- * Configura as abas interativas do Mockup do Aplicativo de Treino (Seção 06)
- */
-function initAppMockupTabs() {
-  const tabButtons = document.querySelectorAll("[data-app-tab-target]");
-  const tabPanels = document.querySelectorAll("[data-app-tab-panel]");
-
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const targetId = btn.getAttribute("data-app-tab-target");
-
-      tabButtons.forEach((b) => {
-        const isSelected = b === btn;
-        b.classList.toggle("is-active", isSelected);
-        b.setAttribute("aria-selected", String(isSelected));
-      });
-
-      tabPanels.forEach((panel) => {
-        const isMatch = panel.getAttribute("data-app-tab-panel") === targetId;
-        panel.hidden = !isMatch;
-        panel.classList.toggle("is-active", isMatch);
-      });
-    });
-  });
-}
-
-/**
  * Configura o Menu Mobile no Header Sticky
  */
 function initMobileNavigation() {
@@ -189,19 +173,37 @@ function initMobileNavigation() {
 
   if (!menuToggle || !mobileDrawer) return;
 
+  function setMobileNavOpen(isOpen, shouldFocusToggle = true) {
+    const isCurrentlyOpen = !mobileDrawer.hidden;
+    if (isCurrentlyOpen === isOpen) return;
+
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    mobileDrawer.hidden = !isOpen;
+    document.body.classList.toggle("nav-open", isOpen);
+
+    if (isOpen) {
+      const firstLink = mobileDrawer.querySelector("a, button");
+      if (firstLink) firstLink.focus();
+    } else if (shouldFocusToggle) {
+      menuToggle.focus();
+    }
+  }
+
   menuToggle.addEventListener("click", () => {
     const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
-    menuToggle.setAttribute("aria-expanded", String(!isExpanded));
-    mobileDrawer.hidden = isExpanded;
-    document.body.classList.toggle("nav-open", !isExpanded);
+    setMobileNavOpen(!isExpanded, true);
   });
 
-  mobileDrawer.querySelectorAll("a").forEach((link) => {
+  mobileDrawer.querySelectorAll("a, button").forEach((link) => {
     link.addEventListener("click", () => {
-      menuToggle.setAttribute("aria-expanded", "false");
-      mobileDrawer.hidden = true;
-      document.body.classList.remove("nav-open");
+      setMobileNavOpen(false, false);
     });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !mobileDrawer.hidden) {
+      setMobileNavOpen(false, true);
+    }
   });
 }
 
@@ -261,7 +263,7 @@ function initScrollReveal() {
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const revealElements = document.querySelectorAll(".reveal");
-  const curveMarks = document.querySelectorAll(".evo-mark");
+  const curveMarks = document.querySelectorAll(".evo-mark, .evo-underline");
 
   if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
     revealElements.forEach((el) => el.classList.add("is-visible"));
@@ -270,6 +272,15 @@ function initScrollReveal() {
   }
 
   document.documentElement.classList.add("motion-ok");
+
+  // Ativa imediatamente marcas fora de contêineres .reveal (ex: no Hero)
+  curveMarks.forEach((mark) => {
+    if (!mark.closest(".reveal")) {
+      requestAnimationFrame(() => {
+        mark.classList.add("is-drawn");
+      });
+    }
+  });
 
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
@@ -287,6 +298,42 @@ function initScrollReveal() {
   );
 
   revealElements.forEach((el) => revealObserver.observe(el));
+}
+
+/**
+ * Suporte a testes A/B dinâmicos na Headline do Hero (?hero=b|c ou ?headline=2|3)
+ */
+export function initHeroABTesting() {
+  if (typeof window === "undefined" || !window.location) return;
+  const heroHeading = document.getElementById("hero-heading");
+  if (!heroHeading) return;
+
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const variantParam = (urlParams.get("hero") || urlParams.get("headline") || "").toLowerCase();
+
+    const variants = {
+      b: 'Treine com professores no salão que corrigem seu movimento e montam seu treino — <span class="evo-mark">sem pagar personal por fora.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      "2": 'Treine com professores no salão que corrigem seu movimento e montam seu treino — <span class="evo-mark">sem pagar personal por fora.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      c: 'A academia mais completa do Centro de Timbó: 100% climatizada, aberta às 05h30 e com <span class="evo-mark">acompanhamento de verdade.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      "3": 'A academia mais completa do Centro de Timbó: 100% climatizada, aberta às 05h30 e com <span class="evo-mark">acompanhamento de verdade.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+    };
+
+    if (variants[variantParam]) {
+      heroHeading.innerHTML = variants[variantParam];
+      trackConversionEvent("ab_test_view", {
+        experiment_id: "hero_headline",
+        variant: variantParam,
+      });
+      // Garante desenho da curva após renderizar a variante
+      const mark = heroHeading.querySelector(".evo-mark, .evo-underline");
+      if (mark) {
+        requestAnimationFrame(() => mark.classList.add("is-drawn"));
+      }
+    }
+  } catch (err) {
+    // Silently continue if URL parsing fails
+  }
 }
 
 /**
@@ -415,9 +462,9 @@ if (typeof document !== "undefined") {
 
     initWhatsAppInteractions();
     initMicroConversionTracking();
-    initAppMockupTabs();
     initMobileNavigation();
     initAnchorNavigation();
+    initHeroABTesting();
     initScrollReveal();
     initFaqAccordion();
   });
