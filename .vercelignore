@@ -1,0 +1,7 @@
+tests
+scripts
+package.json
+package-lock.json
+README.md
+.git
+.gitignore
