@@ -40,7 +40,8 @@ test("2. Motor de Horário (America/Sao_Paulo): Segunda a Quinta (05:30 às 23:0
   const monOpen = getEvolutionGymStatus({ dayOfWeek: 1, hour: 5, minute: 30 });
   assert.equal(monOpen.isOpen, true);
   assert.equal(monOpen.stateCode, "OPEN");
-  assert.match(monOpen.badgeText, /ABERTA AGORA • Até às 23:00/);
+  assert.match(monOpen.badgeText, /ABERTA AGORA • Até 23h00/);
+  assert.equal(monOpen.shortBadgeText, "Aberta • até 23h");
 
   // Quarta-feira às 21:00 (Aberto)
   const wedOpen = getEvolutionGymStatus({ dayOfWeek: 3, hour: 21, minute: 0 });
@@ -51,18 +52,21 @@ test("2. Motor de Horário (America/Sao_Paulo): Segunda a Quinta (05:30 às 23:0
   assert.equal(thuClosing.isOpen, true);
   assert.equal(thuClosing.closingSoon, true);
   assert.equal(thuClosing.stateCode, "CLOSING_SOON");
-  assert.match(thuClosing.badgeText, /FECHANDO EM BREVE • Fecha às 23:00/);
+  assert.match(thuClosing.badgeText, /FECHANDO EM BREVE • Fecha às 23h00/);
+  assert.equal(thuClosing.shortBadgeText, "Fecha em 15 min");
 });
 
 test("3. Motor de Horário: Sexta-feira (05:30 às 22:00) e fechamento após 22:00", () => {
   const friOpen = getEvolutionGymStatus({ dayOfWeek: 5, hour: 19, minute: 0 });
   assert.equal(friOpen.isOpen, true);
-  assert.match(friOpen.badgeText, /Até às 22:00/);
+  assert.match(friOpen.badgeText, /Até 22h00/);
+  assert.equal(friOpen.shortBadgeText, "Aberta • até 22h");
 
   const friClosed = getEvolutionGymStatus({ dayOfWeek: 5, hour: 22, minute: 1 });
   assert.equal(friClosed.isOpen, false);
   assert.equal(friClosed.stateCode, "CLOSED");
-  assert.match(friClosed.badgeText, /FECHADA AGORA • Abre amanhã às 09:00/);
+  assert.match(friClosed.badgeText, /FECHADA AGORA • Abre amanhã às 09h00/);
+  assert.equal(friClosed.shortBadgeText, "Abre amanhã 09h");
 });
 
 test("4. Motor de Horário: Sábado (09:00 às 12:00) e fechamento após 12:00", () => {
@@ -70,13 +74,13 @@ test("4. Motor de Horário: Sábado (09:00 às 12:00) e fechamento após 12:00",
   const satMorning = getEvolutionGymStatus({ dayOfWeek: 6, hour: 10, minute: 30 });
   assert.equal(satMorning.isOpen, true);
   assert.equal(satMorning.stateCode, "OPEN");
-  assert.match(satMorning.badgeText, /ABERTA AGORA • Até às 12:00/);
+  assert.match(satMorning.badgeText, /ABERTA AGORA • Até 12h00/);
 
   // Sábado 13:30 (Encerrado -> Abre amanhã (domingo) às 17:00)
   const satAfternoon = getEvolutionGymStatus({ dayOfWeek: 6, hour: 13, minute: 30 });
   assert.equal(satAfternoon.isOpen, false);
   assert.equal(satAfternoon.stateCode, "CLOSED");
-  assert.match(satAfternoon.badgeText, /FECHADA AGORA • Abre amanhã às 17:00/);
+  assert.match(satAfternoon.badgeText, /FECHADA AGORA • Abre amanhã às 17h00/);
 });
 
 test("5. Motor de Horário: Domingo (17:00 às 19:00) -> Manhã, Tarde aberta e Noite fechada", () => {
@@ -84,19 +88,21 @@ test("5. Motor de Horário: Domingo (17:00 às 19:00) -> Manhã, Tarde aberta e 
   const sunBefore = getEvolutionGymStatus({ dayOfWeek: 0, hour: 14, minute: 0 });
   assert.equal(sunBefore.isOpen, false);
   assert.equal(sunBefore.stateCode, "CLOSED_OPENS_TODAY");
-  assert.match(sunBefore.badgeText, /FECHADA AGORA • Abre hoje às 17:00/);
+  assert.match(sunBefore.badgeText, /FECHADA AGORA • Abre hoje às 17h00/);
+  assert.equal(sunBefore.shortBadgeText, "Abre hoje 17h");
 
   // Domingo 18:00 (Aberto das 17:00 às 19:00)
   const sunOpen = getEvolutionGymStatus({ dayOfWeek: 0, hour: 18, minute: 0 });
   assert.equal(sunOpen.isOpen, true);
   assert.equal(sunOpen.stateCode, "OPEN");
-  assert.match(sunOpen.badgeText, /ABERTA AGORA • Até às 19:00/);
+  assert.match(sunOpen.badgeText, /ABERTA AGORA • Até 19h00/);
 
   // Domingo 19:30 (Encerrado -> Abre amanhã (segunda) às 05:30)
   const sunNight = getEvolutionGymStatus({ dayOfWeek: 0, hour: 19, minute: 30 });
   assert.equal(sunNight.isOpen, false);
   assert.equal(sunNight.stateCode, "CLOSED");
-  assert.match(sunNight.badgeText, /FECHADA AGORA • Abre amanhã às 05:30/);
+  assert.match(sunNight.badgeText, /FECHADA AGORA • Abre amanhã às 05h30/);
+  assert.equal(sunNight.shortBadgeText, "Abre amanhã 05h30");
 });
 
 test("6. Seletor Inteligente de WhatsApp e Disparo de Analytics (GA4 dataLayer)", () => {
@@ -346,13 +352,15 @@ test("10. Acessibilidade (WCAG AA), Design Tokens e Hierarquia de Cabeçalhos", 
   );
 });
 
-test("11. Transparência de Preços de Referência e FAQ Resiliente", () => {
+test("11. Placeholders de Preços (R$ XXX) e FAQ Resiliente", () => {
   const htmlPath = path.join(ROOT_DIR, "index.html");
   const htmlContent = fs.readFileSync(htmlPath, "utf-8");
 
-  assert.ok(htmlContent.includes("139,90"), "Plano Mensal com valor de referência R$ 139,90");
-  assert.ok(htmlContent.includes("119,90"), "Plano Trimestral com valor de referência R$ 119,90");
-  assert.ok(htmlContent.includes("99,90"), "Plano Anual com valor de referência R$ 99,90");
+  const priceVals = [...htmlContent.matchAll(/class="plan-price-val tabular-nums">([^<]+)</g)].map((m) => m[1]);
+  assert.deepEqual(priceVals, ["XXX", "XXX", "XXX"], "Os 3 planos devem exibir placeholder XXX");
+  assert.equal(htmlContent.includes("139,90"), false, "Não deve haver valor numérico fixo 139,90");
+  assert.equal(htmlContent.includes("119,90"), false, "Não deve haver valor numérico fixo 119,90");
+  assert.equal(htmlContent.includes("99,90"), false, "Não deve haver valor numérico fixo 99,90");
 
   assert.ok(
     htmlContent.includes("Trabalhamos com transparência absoluta"),
@@ -395,20 +403,35 @@ test("12. Auditoria 360: Performance, Resiliência PWA, Semântica de Horários 
     "Opções do popover de WhatsApp devem ser tags <a> com wa.me direto"
   );
 
-  // 5. PWA Manifest e Apple Touch Icon
+  // 5. PWA Manifest e Apple Touch Icon quadrado
   assert.ok(
     htmlContent.includes('<link rel="manifest" href="./public/manifest.webmanifest" />'),
     "HTML deve conter link para o manifesto PWA"
   );
   assert.ok(
-    htmlContent.includes('<link rel="apple-touch-icon" href="./public/assets/brand/logo-evolution.png" />'),
-    "HTML deve apontar apple-touch-icon para imagem PNG válida"
+    htmlContent.includes('<link rel="apple-touch-icon" sizes="180x180" href="./public/assets/brand/apple-touch-icon.png" />'),
+    "HTML deve apontar apple-touch-icon para ícone quadrado 180x180"
   );
+  for (const iconFile of [
+    "public/assets/brand/apple-touch-icon.png",
+    "public/assets/brand/icon-192.png",
+    "public/assets/brand/icon-512.png",
+  ]) {
+    const absIcon = path.join(ROOT_DIR, iconFile);
+    assert.ok(fs.existsSync(absIcon), `Ícone PWA deve existir: ${iconFile}`);
+    assert.ok(fs.statSync(absIcon).size > 0, `Ícone PWA não pode estar vazio: ${iconFile}`);
+  }
   const manifestPath = path.join(ROOT_DIR, "public/manifest.webmanifest");
   assert.ok(fs.existsSync(manifestPath), "Arquivo manifest.webmanifest deve existir");
   const manifestContent = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
   assert.equal(manifestContent.name, "Academia Evolution Fitness");
   assert.equal(manifestContent.theme_color, "#000000");
+  assert.ok(
+    manifestContent.icons.some((ic) => ic.src === "/public/assets/brand/icon-192.png" && ic.sizes === "192x192")
+  );
+  assert.ok(
+    manifestContent.icons.some((ic) => ic.src === "/public/assets/brand/icon-512.png" && ic.sizes === "512x512")
+  );
 
   // 6. Tipografia mono deve reutilizar Inter com tabular-nums
   assert.ok(
@@ -464,6 +487,52 @@ test("13. Seção de Instrutores (#instrutores): Perfis, CREF, Fotos, SSOT e Pos
   assert.ok(
     htmlContent.includes('data-wa-intent="instrutores"'),
     "Seção de instrutores deve possuir CTA com data-wa-intent='instrutores'"
+  );
+});
+
+test("14. Regressões da Auditoria Mobile & Copy: SVGs, Textos, Viewport e Imagens Otimizadas", () => {
+  const htmlContent = fs.readFileSync(path.join(ROOT_DIR, "index.html"), "utf-8");
+  const mainCssContent = fs.readFileSync(path.join(ROOT_DIR, "src/styles/main.css"), "utf-8");
+
+  // SVG global sem atributo hidden (compatibilidade iOS Safari)
+  assert.ok(htmlContent.includes('class="svg-defs"'), "SVG defs deve usar classe .svg-defs");
+  assert.equal(/<svg[^>]+hidden[^>]*class="sr-only"/i.test(htmlContent), false, "SVG defs não deve usar hidden");
+
+  // Textos corrigidos da auditoria
+  assert.equal(htmlContent.includes("Seg. à qui."), false, "Crase incorreta 'Seg. à qui.' não deve existir");
+  assert.equal(htmlContent.includes("zero risco de lesão"), false, "Promessa absoluta 'zero risco de lesão' removida");
+  assert.equal(htmlContent.includes("191 reviews"), false, "Anglicismo '191 reviews' substituído por avaliações");
+  assert.equal(htmlContent.includes("Google Meu Negócio"), false, "Nome antigo 'Google Meu Negócio' removido");
+  assert.equal(
+    htmlContent.includes("e feriados) pode sofrer alterações em feriados"),
+    false,
+    "Redundância na nota de feriados removida"
+  );
+  assert.equal(htmlContent.includes("Cárdio"), false, "Termo padronizado para 'Cardio'");
+
+  // Viewport safe-area e containers mobile com scroll
+  assert.ok(htmlContent.includes("viewport-fit=cover"), "Viewport deve habilitar viewport-fit=cover para safe-area iOS");
+  assert.match(mainCssContent, /\.mobile-nav-drawer\s*\{[^}]*overflow-y:\s*auto/s);
+  assert.match(mainCssContent, /\.whatsapp-popover\s*\{[^}]*overflow-y:\s*auto/s);
+
+  // Peso otimizado das imagens do Hero
+  const heroMainSize = fs.statSync(path.join(ROOT_DIR, "public/assets/images/hero-salao-climatizado.jpg")).size;
+  const heroMobileSize = fs.statSync(
+    path.join(ROOT_DIR, "public/assets/images/hero-salao-climatizado-mobile.jpg")
+  ).size;
+  assert.ok(heroMainSize < 300 * 1024, `Hero desktop deve ser < 300KB (atual: ${Math.round(heroMainSize / 1024)}KB)`);
+  assert.ok(
+    heroMobileSize < 120 * 1024,
+    `Hero mobile deve ser < 120KB (atual: ${Math.round(heroMobileSize / 1024)}KB)`
+  );
+
+  // Zero fotos repetidas em public/assets/images/ no HTML
+  const photoSrcs = [...htmlContent.matchAll(/src="(\.\/public\/assets\/images\/[^"]+)"/g)].map((m) => m[1]);
+  assert.equal(photoSrcs.length, 10, "Deve haver 10 slots de fotos no HTML");
+  assert.equal(
+    new Set(photoSrcs).size,
+    photoSrcs.length,
+    `Não pode haver imagens repetidas no HTML (encontradas: ${photoSrcs.length}, únicas: ${new Set(photoSrcs).size})`
   );
 });
 

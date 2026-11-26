@@ -77,6 +77,24 @@ export function getTimboCurrentTime(customInput) {
 }
 
 /**
+ * Formata "HH:MM" para padrão brasileiro "HHhMM" (ex.: "23:00" -> "23h00")
+ * @param {string} timeStr
+ * @returns {string}
+ */
+export function formatHourPT(timeStr) {
+  return timeStr.replace(":", "h");
+}
+
+/**
+ * Formata "HH:MM" de forma compacta para caber em badges mobile (ex.: "23:00" -> "23h", "05:30" -> "05h30")
+ * @param {string} timeStr
+ * @returns {string}
+ */
+export function formatHourCompactPT(timeStr) {
+  return timeStr.endsWith(":00") ? `${timeStr.slice(0, 2)}h` : timeStr.replace(":", "h");
+}
+
+/**
  * Retorna o status completo de funcionamento da Academia Evolution Fitness
  * @param {Date | { dayOfWeek: number, hour: number, minute: number }} [customInput]
  */
@@ -101,12 +119,12 @@ export function getEvolutionGymStatus(customInput) {
         formattedTime,
         stateCode: isClosingSoon ? "CLOSING_SOON" : "OPEN",
         badgeText: isClosingSoon
-          ? `FECHANDO EM BREVE • Fecha às ${shift.close}`
-          : `ABERTA AGORA • Até às ${shift.close}`,
+          ? `FECHANDO EM BREVE • Fecha às ${formatHourPT(shift.close)}`
+          : `ABERTA AGORA • Até ${formatHourPT(shift.close)}`,
         shortBadgeText: isClosingSoon
-          ? `Fecha em ${minutesToClose} min (${shift.close})`
-          : `Aberta agora • Até ${shift.close}`,
-        detailText: `Horário local em Timbó: ${formattedTime} (${dayName})`,
+          ? `Fecha em ${minutesToClose} min`
+          : `Aberta • até ${formatHourCompactPT(shift.close)}`,
+        detailText: `Horário local em Timbó: ${formatHourPT(formattedTime)} (${dayName})`,
         holidayWarning: "O horário pode mudar em feriados.",
       };
     }
@@ -123,9 +141,9 @@ export function getEvolutionGymStatus(customInput) {
         dayName,
         formattedTime,
         stateCode: "CLOSED_OPENS_TODAY",
-        badgeText: `FECHADA AGORA • Abre hoje às ${shift.open}`,
-        shortBadgeText: `Fechada • Abre hoje ${shift.open}`,
-        detailText: `Prepare seu treino! Abrimos hoje das ${shift.open} às ${shift.close} (Horário local: ${formattedTime}).`,
+        badgeText: `FECHADA AGORA • Abre hoje às ${formatHourPT(shift.open)}`,
+        shortBadgeText: `Abre hoje ${formatHourCompactPT(shift.open)}`,
+        detailText: `Prepare seu treino! Abrimos hoje das ${formatHourPT(shift.open)} às ${formatHourPT(shift.close)} (Horário local: ${formatHourPT(formattedTime)}).`,
         holidayWarning: "O horário pode mudar em feriados.",
       };
     }
@@ -138,6 +156,7 @@ export function getEvolutionGymStatus(customInput) {
     if (nextDayShifts && nextDayShifts.length > 0) {
       const firstShift = nextDayShifts[0];
       const dayLabel = offset === 1 ? "amanhã" : `${DAY_NAMES_PT[nextDayIndex]}`;
+      const shortDayLabel = offset === 1 ? "amanhã" : `${DAY_NAMES_PT[nextDayIndex].slice(0, 3)}.`;
       return {
         isOpen: false,
         closingSoon: false,
@@ -145,9 +164,9 @@ export function getEvolutionGymStatus(customInput) {
         dayName,
         formattedTime,
         stateCode: "CLOSED",
-        badgeText: `FECHADA AGORA • Abre ${dayLabel} às ${firstShift.open}`,
-        shortBadgeText: `Fechada • Abre ${dayLabel} ${firstShift.open}`,
-        detailText: `Horário local em Timbó: ${formattedTime} (${dayName}). Deixe sua mensagem no WhatsApp!`,
+        badgeText: `FECHADA AGORA • Abre ${dayLabel} às ${formatHourPT(firstShift.open)}`,
+        shortBadgeText: `Abre ${shortDayLabel} ${formatHourCompactPT(firstShift.open)}`,
+        detailText: `Horário local em Timbó: ${formatHourPT(formattedTime)} (${dayName}). Deixe sua mensagem no WhatsApp!`,
         holidayWarning: "O horário pode mudar em feriados.",
       };
     }

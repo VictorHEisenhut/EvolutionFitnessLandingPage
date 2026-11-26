@@ -37,36 +37,40 @@ export const BUSINESS_DATA = {
     instagramUrl: "https://www.instagram.com/academiaevolutionfitness_/",
   },
 
+  // Valores placeholder (substituir pelos valores vigentes da academia)
   plans: {
     mensal: {
       id: "mensal",
       name: "Plano Mensal",
       kicker: "Flexibilidade Total",
-      priceReference: "139,90",
+      priceReference: "XXX",
       periodLabel: "/mês",
       commitment: "Sem fidelidade",
-      description: "Ideal para quem quer experimentar a rotina da academia com liberdade absoluta.",
+      description: "Ideal para quem quer experimentar a rotina da academia com liberdade absoluta, sem fidelidade.",
+      isPlaceholder: true,
     },
     trimestral: {
       id: "trimestral",
       name: "Plano Trimestral",
       kicker: "Evolução Consistente",
-      priceReference: "119,90",
+      priceReference: "XXX",
       periodLabel: "/mês",
       commitment: "Plano de 90 dias",
-      description: "O equilíbrio perfeito para consolidar o hábito do treino com desconto progressivo.",
+      description: "O equilíbrio perfeito para consolidar o hábito do treino e conquistar resultados em 90 dias.",
+      isPlaceholder: true,
     },
     anual: {
       id: "anual",
       name: "Plano Anual / Recorrente",
       kicker: "Melhor Custo-Benefício",
-      priceReference: "99,90",
-      priceOld: "139,90",
-      savingsText: "Economize R$ 480 no ano",
+      priceReference: "XXX",
+      priceOld: "XXX",
+      savingsText: "Economize R$ XXX no ano",
       periodLabel: "/mês",
       commitment: "12 meses recorrente",
       popularBadge: "Mais Escolhido • Economia Máxima",
-      description: "Para quem decidiu transformar saúde e força em estilo de vida com a maior economia.",
+      description: "Para quem decidiu fazer da saúde, força e longevidade um estilo de vida definitivo.",
+      isPlaceholder: true,
     },
   },
 
@@ -80,7 +84,7 @@ export const BUSINESS_DATA = {
     score: "4.7",
     maxScore: "5.0",
     count: 191,
-    source: "Google Meu Negócio",
+    source: "Google",
   },
 
   partnerships: [
@@ -125,7 +129,7 @@ export const BUSINESS_DATA = {
     {
       id: "gabriel-santos",
       author: "Gabriel Santos",
-      badge: "Local Guide • Avaliação 5 Estrelas",
+      badge: "Avaliação Verificada no Google",
       rating: 5,
       quote:
         "Academia com ótima estrutura, limpa, climatizada, espaçosa e bem decorada. Dispõe de instrutores interessados a ensinar. Possui estacionamento próprio e acessível para os clientes.",
@@ -134,7 +138,7 @@ export const BUSINESS_DATA = {
     {
       id: "marlene-mattei-moreira",
       author: "Marlene Mattei Moreira",
-      badge: "Aluna Verificada • Avaliação 5 Estrelas",
+      badge: "Avaliação Verificada no Google",
       rating: 5,
       quote:
         "Excelente academia, ambiente familiar, equipe de funcionários prontos para nos atender.",
@@ -143,7 +147,7 @@ export const BUSINESS_DATA = {
     {
       id: "sopros-wollinger",
       author: "Sopros Wollinger",
-      badge: "Local Guide • Avaliação 5 Estrelas",
+      badge: "Avaliação Verificada no Google",
       rating: 5,
       quote:
         "Academia excelente no Centro de Timbó! Estrutura de primeira, ambiente limpo, climatizado e atendimento nota 10 de toda a equipe.",
@@ -158,11 +162,11 @@ export const BUSINESS_DATA = {
       name: "Rafael Mendes",
       role: "Coordenador Técnico & Biomecânica",
       cref: "CREF 024810-G/SC",
-      shift: "Manhã • 05h30 às 12h",
+      shift: "Manhã • 05h30 às 12h00",
       specialties: ["Hipertrofia", "Biomecânica", "Iniciantes"],
       bio: "Especialista em montagem de treinos individualizados e correção postural para quem busca resultados consistentes com total segurança.",
-      photo: "./public/assets/images/instrutor-acompanhamento.jpg",
-      photoAlt: "Instrutor Rafael Mendes acompanhando execução de exercício no salão da Academia Evolution Fitness",
+      photo: "./public/assets/images/instrutor-rafael.jpg",
+      photoAlt: "Instrutor Rafael Mendes no salão da Academia Evolution Fitness",
       isPlaceholder: true,
     },
     {
@@ -170,7 +174,7 @@ export const BUSINESS_DATA = {
       name: "Fernanda Klemz",
       role: "Emagrecimento, Saúde & Reabilitação",
       cref: "CREF 027642-G/SC",
-      shift: "Tarde • 12h às 18h",
+      shift: "Tarde • 12h00 às 18h00",
       specialties: ["Emagrecimento", "Terceira Idade", "Postura & Lesões"],
       bio: "Acompanhamento acolhedor e adaptado para fortalecimento articular, definição muscular, prevenção de dores e qualidade de vida em todas as idades.",
       photo: "./public/assets/images/instrutora-fernanda.jpg",
@@ -182,7 +186,7 @@ export const BUSINESS_DATA = {
       name: "Lucas Ferreira",
       role: "Força & Treinamento Funcional",
       cref: "CREF 031208-G/SC",
-      shift: "Noite • 17h às 23h",
+      shift: "Noite • 17h00 às 23h00",
       specialties: ["Treino Funcional", "Pesos Livres", "Mobilidade"],
       bio: "Foco em progressão segura de cargas, mobilidade articular e condicionamento completo com supervisão ativa no salão do básico ao avançado.",
       photo: "./public/assets/images/instrutor-lucas.jpg",

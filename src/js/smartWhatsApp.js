@@ -19,21 +19,21 @@ export const WHATSAPP_INTENTS = {
   planos: {
     key: "planos",
     label: "Consultar Planos e Matrícula",
-    subtitle: "Valores Mensal, Trimestral e Anual/Recorrente",
+    subtitle: "Mensal, Trimestral, Anual e Convênios",
     message:
       "Olá! Vim pelo site da Academia Evolution Fitness e gostaria de conhecer os planos e valores (Mensal, Trimestral, Anual e Convênios).",
   },
   modalidades: {
     key: "modalidades",
     label: "Modalidades & Funcional",
-    subtitle: "Musculação, Cárdio e Treino Funcional",
+    subtitle: "Musculação, Cardio e Treino Funcional",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre as modalidades de Musculação, Cárdio e Treinamento Funcional.",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre as modalidades de Musculação, Cardio e Treinamento Funcional.",
   },
   aluno: {
     key: "aluno",
-    label: "Atendimento ao Aluno / Recepção",
-    subtitle: "Já sou aluno(a) da Evolution Fitness",
+    label: "Atendimento ao Aluno",
+    subtitle: "Já sou aluno(a) / Falar com a recepção",
     message:
       "Olá, equipe Evolution Fitness! Já sou aluno(a) e gostaria de falar com a recepção.",
   },
@@ -47,38 +47,38 @@ export const WHATSAPP_INTENTS = {
   },
   cardio: {
     key: "cardio",
-    label: "Ergometria & Cárdio",
+    label: "Ergometria & Cardio",
     subtitle: "Esteiras, bikes e queima calórica",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre a área de Ergometria e Cárdio no salão 100% climatizado.",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre a área de Ergometria e Cardio no salão 100% climatizado.",
   },
   funcional: {
     key: "funcional",
     label: "Treinamento Funcional & Pesos Livres",
     subtitle: "Mobilidade, equilíbrio e dinamismo",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre o Treinamento Funcional e área de Pesos Livres.",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de saber mais sobre o Treinamento Funcional e a área de Pesos Livres.",
   },
   plano_mensal: {
     key: "plano_mensal",
     label: "Plano Mensal (Flexibilidade)",
-    subtitle: "A partir de R$ 139,90/mês",
+    subtitle: "A partir de R$ XXX/mês",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar as condições do Plano Mensal (a partir de R$ 139,90/mês).",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar os valores e condições do Plano Mensal.",
   },
   plano_trimestral: {
     key: "plano_trimestral",
     label: "Plano Trimestral (Evolução Consistente)",
-    subtitle: "A partir de R$ 119,90/mês",
+    subtitle: "A partir de R$ XXX/mês",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar as condições do Plano Trimestral (a partir de R$ 119,90/mês).",
+      "Olá! Vim pelo site da Evolution Fitness e gostaria de consultar os valores e condições do Plano Trimestral.",
   },
   plano_anual: {
     key: "plano_anual",
     label: "Plano Anual / Recorrente (Melhor Custo-Benefício)",
-    subtitle: "A partir de R$ 99,90/mês • Economia Máxima",
+    subtitle: "A partir de R$ XXX/mês • Economia Máxima",
     message:
-      "Olá! Vim pelo site da Evolution Fitness e quero garantir a condição especial do Plano Anual / Recorrente (a partir de R$ 99,90/mês).",
+      "Olá! Vim pelo site da Evolution Fitness e quero consultar a condição especial do Plano Anual / Recorrente.",
   },
   convenios: {
     key: "convenios",

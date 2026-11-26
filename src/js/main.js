@@ -73,6 +73,15 @@ function initWhatsAppInteractions() {
     popover.setAttribute("aria-modal", String(isOpen));
 
     if (isOpen) {
+      // Fecha o drawer mobile caso esteja aberto para evitar sobreposição
+      const mobileDrawer = document.getElementById("mobile-nav-drawer");
+      const menuToggle = document.getElementById("mobile-menu-toggle");
+      if (mobileDrawer && !mobileDrawer.hidden) {
+        mobileDrawer.hidden = true;
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+      }
+
       const firstOption = popover.querySelector(".wa-intent-option, button, a");
       if (firstOption) firstOption.focus();
       const currentStatus = getEvolutionGymStatus();
@@ -182,6 +191,17 @@ function initMobileNavigation() {
     document.body.classList.toggle("nav-open", isOpen);
 
     if (isOpen) {
+      // Garante que o popover do WhatsApp feche ao abrir o menu mobile
+      const waPopover = document.getElementById("whatsapp-popover");
+      const waWidget = document.getElementById("smart-whatsapp-widget");
+      const waToggle = document.getElementById("whatsapp-widget-toggle");
+      if (waPopover && !waPopover.hidden) {
+        waPopover.hidden = true;
+        waPopover.setAttribute("aria-modal", "false");
+        if (waWidget) waWidget.classList.remove("is-open");
+        if (waToggle) waToggle.setAttribute("aria-expanded", "false");
+      }
+
       const firstLink = mobileDrawer.querySelector("a, button");
       if (firstLink) firstLink.focus();
     } else if (shouldFocusToggle) {
@@ -189,7 +209,8 @@ function initMobileNavigation() {
     }
   }
 
-  menuToggle.addEventListener("click", () => {
+  menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
     const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
     setMobileNavOpen(!isExpanded, true);
   });
@@ -198,6 +219,16 @@ function initMobileNavigation() {
     link.addEventListener("click", () => {
       setMobileNavOpen(false, false);
     });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      !mobileDrawer.hidden &&
+      !mobileDrawer.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      setMobileNavOpen(false, false);
+    }
   });
 
   document.addEventListener("keydown", (e) => {
@@ -313,10 +344,10 @@ export function initHeroABTesting() {
     const variantParam = (urlParams.get("hero") || urlParams.get("headline") || "").toLowerCase();
 
     const variants = {
-      b: 'Treine com professores no salão que corrigem seu movimento e montam seu treino — <span class="evo-mark">sem pagar personal por fora.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
-      "2": 'Treine com professores no salão que corrigem seu movimento e montam seu treino — <span class="evo-mark">sem pagar personal por fora.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
-      c: 'A academia mais completa do Centro de Timbó: 100% climatizada, aberta às 05h30 e com <span class="evo-mark">acompanhamento de verdade.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
-      "3": 'A academia mais completa do Centro de Timbó: 100% climatizada, aberta às 05h30 e com <span class="evo-mark">acompanhamento de verdade.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      b: 'Professores no salão corrigindo cada treino — <span class="evo-mark">sem pagar personal.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      "2": 'Professores no salão corrigindo cada treino — <span class="evo-mark">sem pagar personal.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      c: 'Climatizada, aberta às 05h30 no Centro e com <span class="evo-mark">treino acompanhado.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
+      "3": 'Climatizada, aberta às 05h30 no Centro e com <span class="evo-mark">treino acompanhado.<svg class="evo-underline" viewBox="0 0 240 48" aria-hidden="true"><path class="evo-curve" d="M6 38C54 44 118 42 168 30C194 24 214 14 226 6C232 2 236 4 234 10" /></svg></span>',
     };
 
     if (variants[variantParam]) {
@@ -347,7 +378,7 @@ export function initFaqAccordion() {
   const faqItems = faqList.querySelectorAll("details");
   if (!faqItems.length) return;
 
-  const DURATION = 760;
+  const DURATION = 280;
   const EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
 
   function isReducedMotion() {
@@ -372,6 +403,7 @@ export function initFaqAccordion() {
       return;
     }
 
+    detail.classList.remove("is-opening");
     detail.classList.add("is-closing");
     const currentHeight = answer.offsetHeight;
 
@@ -411,8 +443,9 @@ export function initFaqAccordion() {
       answer.getAnimations().forEach((a) => a.cancel());
     }
 
+    detail.classList.add("is-opening");
     const targetHeight = answer.offsetHeight;
-    answer.animate(
+    const anim = answer.animate(
       [
         { height: "0px", opacity: 0, paddingTop: "0px", paddingBottom: "0px" },
         { height: `${targetHeight}px`, opacity: 1, paddingTop: "0px", paddingBottom: "1.4rem" },
@@ -422,9 +455,18 @@ export function initFaqAccordion() {
         easing: EASING,
       }
     );
+
+    const finishOpening = () => {
+      detail.classList.remove("is-opening");
+    };
+
+    anim.onfinish = finishOpening;
+    anim.oncancel = finishOpening;
   }
 
   faqItems.forEach((targetDetail) => {
+    // Remove name no JS para evitar fechamento nativo abrupto em conflito com a animação
+    targetDetail.removeAttribute("name");
     const summary = targetDetail.querySelector("summary");
     if (!summary) return;
 
